@@ -1,5 +1,5 @@
 "use client";
-import { useMediaQuery } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 import { useEffect, useState } from "react";
 import { WelcomeIcon } from "../icons/WelcomeIcon";
 
@@ -33,8 +33,11 @@ export const Header = () => {
   }, []);
 
   return (
-    <header>
+    <Box
+      component="header"
+      sx={{ width: "100vw", position: "fixed", top: { xs: 8, md: 16 } }}
+    >
       {!isMobile || (isMobile && !isInView && <WelcomeIcon hours={hours} />)}
-    </header>
+    </Box>
   );
 };

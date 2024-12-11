@@ -2,12 +2,15 @@
 
 import { createTheme } from "@mui/material";
 
-export const theme = createTheme();
+const theme = createTheme();
+
+// TODO: ADD TYPOGRAPHY VARIANT FOR ERROR
+// TODO: ADD PAPER VARIANT FOR NEWS
 
 theme.typography = {
   ...theme.typography,
   h1: {
-    fontFamily: "Alata, sans-serif",
+    fontFamily: "var(--font-alata-regular)",
     color: "inherit",
     letterSpacing: 0,
     fontWeight: 400,
@@ -17,7 +20,7 @@ theme.typography = {
     },
   },
   h2: {
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-montserrat)",
     color: "inherit",
     letterSpacing: "1%",
     fontWeight: 500,
@@ -27,7 +30,7 @@ theme.typography = {
     },
   },
   h3: {
-    fontFamily: "Alata, sans-serif",
+    fontFamily: "var(--font-alata-regular)",
     color: "inherit",
     letterSpacing: 0,
     fontWeight: 400,
@@ -37,7 +40,7 @@ theme.typography = {
     },
   },
   h4: {
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-montserrat)",
     color: "inherit",
     letterSpacing: "1%",
     fontWeight: 400,
@@ -47,7 +50,7 @@ theme.typography = {
     },
   },
   body1: {
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-montserrat)",
     letterSpacing: "1%",
     color: "inherit",
     fontWeight: 400,
@@ -64,9 +67,46 @@ theme.components = {
     styleOverrides: {
       root: {
         width: "100%",
-        paddingInline: "1rem",
-        paddingTop: "6.75rem",
+      },
+    },
+  },
+  MuiPaper: {
+    styleOverrides: {
+      root: {
+        variants: [
+          {
+            props: { variant: "forecastSection" },
+            style: {
+              "& .dawn": {
+                backgroundColor: "#c2c5ea",
+              },
+              "& .sunset": {
+                backgroundColor: "#d06580",
+              },
+              "& .evening": {
+                backgroundColor: "#6b60bd",
+              },
+              "& .sunny": {
+                backgroundColor: "#d1fffc",
+              },
+              "& .rainy": {
+                backgroundColor: "#394e7a",
+              },
+              "& .snowy": {
+                backgroundColor: "#b1c4d8",
+              },
+              [theme.breakpoints.down("md")]: {
+                marginInline: "1.125rem",
+                width: "100%",
+                borderRadius: 5,
+                padding: "0.75rem",
+              },
+            },
+          },
+        ],
       },
     },
   },
 };
+
+export default theme;

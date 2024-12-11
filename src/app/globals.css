@@ -1,6 +1,6 @@
 :root {
   --background: #eaeaea;
-  --foreground: #181818;
+  --text: #181818;
 }
 
 html,
@@ -10,17 +10,11 @@ body {
 }
 
 body {
-  color: var(--foreground);
+  color: var(--text);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-header {
-  width: 100vw;
-  padding: 1rem;
-  position: relative;
 }
 
 * {
@@ -34,7 +28,7 @@ a {
   text-decoration: none;
 }
 
-.dawn {
+.body-dawn {
   --dawn-start: #c2cfea;
   --dawn-end: #d1c2eab0;
 
@@ -43,10 +37,10 @@ a {
     var(--dawn-start) 30%,
     var(--dawn-end)
   );
-  color: var(--foreground);
+  color: var(--text);
 }
 
-.sunset {
+.body-sunset {
   --sunset-start: #e76e74;
   --sunset-end: #b85c8ab0;
 
@@ -55,10 +49,10 @@ a {
     var(--sunset-start) 30%,
     var(--sunset-end)
   );
-  color: var(--foreground);
+  color: var(--text);
 }
 
-.evening {
+.body-evening {
   --evening-start: #9991d4;
   --evening-end: #443898b0;
 
@@ -70,7 +64,7 @@ a {
   color: lightgray;
 }
 
-.sunny {
+.body-sunny {
   --sunny-start: #d1fffc;
   --sunny-end: #fffb97b0;
 
@@ -79,10 +73,10 @@ a {
     var(--sunny-start) 30%,
     var(--sunny-end)
   );
-  color: var(--foreground);
+  color: var(--text);
 }
 
-.rainy {
+.body-rainy {
   --rainy-start: #7ca7ce;
   --rainy-end: #707290b0;
 
@@ -91,10 +85,10 @@ a {
     var(--rainy-start) 30%,
     var(--rainy-end)
   );
-  color: var(--foreground);
+  color: var(--text);
 }
 
-.snowy {
+.body-snowy {
   --snowy-start: #dde5f4;
   --snowy-end: #668eabb0;
 
@@ -103,7 +97,7 @@ a {
     var(--snowy-start) 30%,
     var(--snowy-end)
   );
-  color: var(--foreground);
+  color: var(--text);
 }
 
 @media screen and (max-width: 744px) {

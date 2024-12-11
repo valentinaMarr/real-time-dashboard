@@ -1,12 +1,7 @@
 "use client";
 
-import {
-  Divider,
-  Grid2 as Grid,
-  Stack,
-  Typography,
-  useMediaQuery,
-} from "@mui/material";
+import { Divider, Grid2 as Grid, Stack, useMediaQuery } from "@mui/material";
+import Typography from "@mui/material/Typography";
 import { useMemo } from "react";
 import { Clock } from "./Clock";
 import { WelcomeIcon } from "./icons/WelcomeIcon";

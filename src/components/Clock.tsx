@@ -1,6 +1,7 @@
 "use client";
 
-import { Stack, Typography, useMediaQuery } from "@mui/material";
+import { Stack, useMediaQuery } from "@mui/material";
+import Typography from "@mui/material/Typography";
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 
