@@ -20,6 +20,9 @@ dependencies:
   '@mui/material-nextjs':
     specifier: ^6.1.9
     version: 6.1.9(@emotion/cache@11.14.0)(@emotion/react@11.14.0)(@types/react@19.0.1)(next@15.0.4)(react@19.0.0)
+  jotai:
+    specifier: ^2.10.3
+    version: 2.10.3(@types/react@19.0.1)(react@19.0.0)
   motion:
     specifier: 12.0.0-alpha.2
     version: 12.0.0-alpha.2(react-dom@19.0.0)(react@19.0.0)
@@ -2336,6 +2339,22 @@ packages:
       reflect.getprototypeof: 1.0.8
       set-function-name: 2.0.2
     dev: true
+
+  /jotai@2.10.3(@types/react@19.0.1)(react@19.0.0):
+    resolution: {integrity: sha512-Nnf4IwrLhNfuz2JOQLI0V/AgwcpxvVy8Ec8PidIIDeRi4KCFpwTFIpHAAcU+yCgnw/oASYElq9UY0YdUUegsSA==}
+    engines: {node: '>=12.20.0'}
+    peerDependencies:
+      '@types/react': '>=17.0.0'
+      react: '>=17.0.0'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      react:
+        optional: true
+    dependencies:
+      '@types/react': 19.0.1
+      react: 19.0.0
+    dev: false
 
   /js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
