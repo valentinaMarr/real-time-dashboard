@@ -56,5 +56,6 @@ declare module "@mui/material/Typography" {
 declare module "@mui/material/Paper" {
   interface PaperPropsVariantOverrides {
     themedPaper: true;
+    discreet: true;
   }
 }

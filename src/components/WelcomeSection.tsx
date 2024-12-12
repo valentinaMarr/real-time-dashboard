@@ -1,6 +1,9 @@
 "use client";
 
-import { Divider, Grid2 as Grid, Stack, useMediaQuery } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
+import Divider from "@mui/material/Divider";
+import Grid2 from "@mui/material/Grid2";
+import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { useMemo } from "react";
 import { Clock } from "./Clock";
@@ -25,12 +28,12 @@ export const WelcomeSection = () => {
   }, []);
 
   return (
-    <Grid
+    <Grid2
       id="welcome-message-container"
       spacing={{ xs: 1.75, md: "auto" }}
       component="section"
     >
-      <Grid
+      <Grid2
         display="flex"
         justifyContent="space-between"
         size={{ xs: 12, md: 6 }}
@@ -42,12 +45,17 @@ export const WelcomeSection = () => {
           <Typography> {`${date.getMonth()}, ${date.getDate()}`} </Typography>
           {isMobile && <Clock />}
         </Stack>
-      </Grid>
+      </Grid2>
       {!isMobile && (
-        <Grid size={6} display="flex" justifyItems="center" alignItems="center">
+        <Grid2
+          size={6}
+          display="flex"
+          justifyItems="center"
+          alignItems="center"
+        >
           <Clock />
-        </Grid>
+        </Grid2>
       )}
-    </Grid>
+    </Grid2>
   );
 };

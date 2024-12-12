@@ -1,3 +1,4 @@
+import { NewsSection } from "@/components/NewsSection";
 import { WeatherSection } from "@/components/WeatherSection";
 import { WelcomeSection } from "@/components/WelcomeSection";
 import Grid2 from "@mui/material/Grid2";
@@ -15,10 +16,10 @@ export default function Home() {
     >
       <WelcomeSection />
       <WeatherSection />
+      <NewsSection />
       <Grid2 size={{ xs: 12, lg: 6 }}>
         {/* TO-DO LIST OR MOTIVATIONAL MESSAGES */}
       </Grid2>
-      <Grid2 size={{ xs: 12, lg: 6 }}>{/* NEWS */}</Grid2>
     </Grid2>
   );
 }

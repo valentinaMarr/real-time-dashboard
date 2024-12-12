@@ -1,11 +1,9 @@
 "use client";
-import {
-  Divider,
-  Grid2 as Grid,
-  Paper,
-  Stack,
-  useMediaQuery,
-} from "@mui/material";
+import { useMediaQuery } from "@mui/material";
+import Divider from "@mui/material/Divider";
+import Grid2 from "@mui/material/Grid2";
+import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { useCallback, useState } from "react";
 import { ErrorMessage } from "./ErrorMessage";
@@ -73,7 +71,7 @@ export const WeatherSection = () => {
   }, []);
 
   if (!location) {
-    <Grid
+    <Grid2
       component="section"
       size={{ xs: 12, md: 6 }}
       aria-label="local weather forecast section"
@@ -85,28 +83,28 @@ export const WeatherSection = () => {
           "It seems that your location is unavailable at the moment."
         }
       />
-    </Grid>;
+    </Grid2>;
   }
 
   return (
-    <Grid
+    <Grid2
       component="section"
       size={{ xs: 12, md: 6 }}
       aria-label="local weather forecast section"
     >
       <Paper elevation={1} variant="themedPaper" className="sunny">
-        <Grid size={{ xs: 12, md: 6 }} spacing={{ xs: 1.75 }}>
-          <Grid size={{ xs: 12, md: 6 }} aria-labeledby="location">
+        <Grid2 size={{ xs: 12, md: 6 }} spacing={{ xs: 1.75 }}>
+          <Grid2 size={{ xs: 12, md: 6 }} aria-labeledby="location">
             <Typography id="location" component="p" variant="body1">
               {location}
             </Typography>
-          </Grid>
+          </Grid2>
           {isMobile && (
-            <Grid size={12} aria-hidden="true">
+            <Grid2 size={12} aria-hidden="true">
               <WeatherIcon forecast="sunny" />
-            </Grid>
+            </Grid2>
           )}
-          <Grid
+          <Grid2
             size={{ xs: 12, md: 6 }}
             offset={{ md: 6 }}
             aria-label="weather forecast"
@@ -117,8 +115,8 @@ export const WeatherSection = () => {
             <Typography component="h4" variant="h4">
               {forecast.description}
             </Typography>
-          </Grid>
-          <Grid size={{ xs: 12, md: 6 }} wrap="wrap">
+          </Grid2>
+          <Grid2 size={{ xs: 12, md: 6 }} wrap="wrap">
             <Stack
               direction={{ xs: "row", md: "column" }}
               divider={!isMobile ? <Divider orientation="horizontal" /> : null}
@@ -150,9 +148,9 @@ export const WeatherSection = () => {
                 );
               })}
             </Stack>
-          </Grid>
-        </Grid>
+          </Grid2>
+        </Grid2>
       </Paper>
-    </Grid>
+    </Grid2>
   );
 };

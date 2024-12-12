@@ -8,3 +8,9 @@ export type ForecastDetails = {
   wind: string;
   humidity: string;
 };
+export type NewsDetails = {
+  headline: string;
+  imgSrc?: string;
+  articleBody: string;
+  articleUrl: string;
+};

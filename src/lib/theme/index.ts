@@ -90,7 +90,7 @@ theme.components = {
       root: {
         width: "100%",
         [theme.breakpoints.down("md")]: {
-          paddingInline: "1rem",
+          paddingX: "1rem",
         },
       },
     },
@@ -102,6 +102,8 @@ theme.components = {
           {
             props: { variant: "themedPaper" },
             style: {
+              width: "100%",
+              borderRadius: 5,
               "& .dawn": {
                 backgroundColor: theme.palette.forecastTheme.dawn,
                 color: theme.palette.grey["900"],
@@ -128,9 +130,37 @@ theme.components = {
               },
               [theme.breakpoints.down("md")]: {
                 marginInline: "1.125rem",
-                width: "100%",
-                borderRadius: 5,
                 padding: "0.75rem",
+              },
+            },
+          },
+          {
+            props: { variant: "discreet" },
+            style: {
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              rowGap: "0.875rem",
+              alignItems: "stretch",
+              justifyContent: "left",
+              borderRadius: 5,
+              textAlign: "left",
+              textWrap: "wrap",
+              wordBreak: "break-word",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              "& .contrasting-dark": {
+                backgroundColor: theme.palette.grey["100"],
+              },
+              "& .contrasting-light": {
+                backgroundColor: theme.palette.grey["400"],
+              },
+              [theme.breakpoints.down("md")]: {
+                marginInline: "1.125rem",
+                paddingX: "1.25rem",
+                paddingTop: "0.93rem",
+                paddingBottom: "1rem",
+                height: "19.38rem",
               },
             },
           },
