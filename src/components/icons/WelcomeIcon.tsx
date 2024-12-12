@@ -15,6 +15,7 @@ export const WelcomeIcon = ({ hours }: { hours: number }) => {
         color: "inherit",
         fontSize: { xs: "1.5rem", md: "2.56rem" },
         backgroundColor: "transparent",
+        zIndex: 100,
       }}
     >
       {hours > 6 && hours < 18 ? <MdOutlineWbSunny /> : <LuMoon />}

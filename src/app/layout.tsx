@@ -14,11 +14,11 @@ const alataRegular = localFont({
 const montserrat = localFont({
   src: [
     {
-      path: "../fonts/Montserrat-Medium.ttf",
+      path: "./fonts/Montserrat-Medium.ttf",
       weight: "500",
     },
     {
-      path: "../fonts/Montserrat-Regular.ttf",
+      path: "./fonts/Montserrat-Regular.ttf",
       weight: "400",
     },
   ],
@@ -38,7 +38,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${montserrat.variable} ${alataRegular.variable}`}>
+      <body
+        className={`${montserrat.variable} ${alataRegular.variable} body-rainy`}
+      >
         <ProvidersAggrergator>
           <Header />
           {children}

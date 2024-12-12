@@ -7,7 +7,9 @@ export default function Home() {
   return (
     <Grid2
       component="main"
-      spacing={{ xs: 1.75 }}
+      container
+      maxWidth="100vw"
+      spacing={{ xs: 12 }}
       sx={{
         paddingTop: {
           xs: "6.75rem",

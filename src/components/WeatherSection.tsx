@@ -72,6 +72,7 @@ export const WeatherSection = () => {
 
   if (!location) {
     <Grid2
+      container
       component="section"
       size={{ xs: 12, md: 6 }}
       aria-label="local weather forecast section"
@@ -92,9 +93,18 @@ export const WeatherSection = () => {
       size={{ xs: 12, md: 6 }}
       aria-label="local weather forecast section"
     >
-      <Paper elevation={1} variant="themedPaper" className="sunny">
-        <Grid2 size={{ xs: 12, md: 6 }} spacing={{ xs: 1.75 }}>
-          <Grid2 size={{ xs: 12, md: 6 }} aria-labeledby="location">
+      <Paper elevation={1} variant="themedPaper" className={`rainy`}>
+        <Grid2
+          container
+          size={{ xs: 12, md: 6 }}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            textAlign: "center",
+            rowGap: { xs: 1.75 },
+          }}
+        >
+          <Grid2 size={{ xs: 12, md: 6 }} aria-labelledby="location">
             <Typography id="location" component="p" variant="body1">
               {location}
             </Typography>

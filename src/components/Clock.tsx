@@ -8,33 +8,39 @@ import { useEffect, useState } from "react";
 export const Clock = () => {
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
 
-  const [time, setTime] = useState<{ hours: number; minutes: number }>({
-    hours: new Date().getHours() || 0,
-    minutes: new Date().getMinutes() || 0,
+  const [time, setTime] = useState<{ hours: string; minutes: string }>({
+    hours: new Date().getHours().toString(),
+    minutes: new Date().getMinutes().toString(),
   });
   const getTime = () => {
-    const currentTime: { hours: number; minutes: number } = {
-      hours: new Date().getHours(),
-      minutes: new Date().getMinutes(),
+    const minutesNumber = new Date().getMinutes();
+    const currentTime: { hours: string; minutes: string } = {
+      hours: new Date().getHours().toString(),
+      minutes:
+        minutesNumber < 10 ? `0${minutesNumber}` : minutesNumber.toString(),
     };
 
-    setTimeout(() => setTime((prev) => ({ ...prev, currentTime })), 1000);
+    setTimeout(() => setTime(currentTime), 1000);
   };
 
   useEffect(() => {
-    return getTime();
-  }, []);
+    getTime();
+  }, [time]);
 
   if (isMobile) {
     return (
       <Stack
         spacing="1px"
         direction="row"
+        alignItems="center"
         component="span"
         aria-label="digital clock"
+        sx={{
+          width: "fit-content",
+        }}
       >
         <Typography variant="h4">{time.hours}</Typography>
-        <motion.p
+        <motion.h4
           initial={{
             opacity: 0,
           }}
@@ -42,12 +48,12 @@ export const Clock = () => {
             opacity: 1,
           }}
           transition={{
-            duration: 0.7,
+            duration: 1.2,
             repeat: Infinity,
           }}
         >
           :
-        </motion.p>
+        </motion.h4>
         <Typography variant="h4">{time.minutes}</Typography>
       </Stack>
     );

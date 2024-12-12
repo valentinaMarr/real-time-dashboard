@@ -13,20 +13,37 @@ export const NewsPaper = ({
   articleUrl,
 }: NewsDetails) => {
   return (
-    <Paper component="article" variant="discreet">
+    <Paper elevation={1} component="article" variant="discreet">
       {imgSrc && (
         <Box
           sx={{
+            position: "relative",
             height: {
-              xs: 243,
+              xs: "10rem",
             },
             width: "100%",
           }}
         >
-          <Image alt="news-cover-image" fill src={imgSrc} placeholder="blur" />
+          <Image
+            alt="news-cover-image"
+            fill
+            src={imgSrc}
+            style={{
+              objectFit: "cover",
+            }}
+          />
         </Box>
       )}
-      <Stack direction="column" component="span" spacing={1}>
+      <Stack
+        direction="column"
+        component="span"
+        spacing={1}
+        sx={{
+          height: "15vh",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+        }}
+      >
         <Typography component="h3" variant="h3">
           {headline}
         </Typography>

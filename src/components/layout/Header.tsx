@@ -11,7 +11,6 @@ export const Header = () => {
 
   const checkItemInView = () => {
     if (!window) {
-      setIsInView(false);
       return;
     }
 
@@ -30,13 +29,10 @@ export const Header = () => {
 
   useEffect(() => {
     checkItemInView();
-  }, []);
+  }, [isInView]);
 
   return (
-    <Box
-      component="header"
-      sx={{ width: "100vw", position: "fixed", top: { xs: 8, md: 16 } }}
-    >
+    <Box component="header" sx={{ position: "fixed", top: { xs: 8, md: 16 } }}>
       {!isMobile || (isMobile && !isInView && <WelcomeIcon hours={hours} />)}
     </Box>
   );

@@ -78,7 +78,7 @@ theme.palette = {
     sunset: "#d06580",
     evening: "#6b60bd",
     sunny: "#d1fffc",
-    rainy: "#394e7a",
+    rainy: "#394E7A",
     snowy: "#b1c4d8",
   },
 };
@@ -102,34 +102,32 @@ theme.components = {
           {
             props: { variant: "themedPaper" },
             style: {
-              width: "100%",
               borderRadius: 5,
-              "& .dawn": {
+              "&.dawn": {
                 backgroundColor: theme.palette.forecastTheme.dawn,
+                color: theme.palette.grey["100"],
+              },
+              "&.sunset": {
+                backgroundColor: theme.palette.forecastTheme.sunset,
+                color: theme.palette.grey["100"],
+              },
+              "&.evening": {
+                backgroundColor: theme.palette.forecastTheme.evening,
+                color: theme.palette.grey["100"],
+              },
+              "&.sunny": {
+                backgroundColor: theme.palette.forecastTheme.sunny,
                 color: theme.palette.grey["900"],
               },
-              "& .sunset": {
-                backgroundColor: theme.palette.forecastTheme.sunset,
-                color: theme.palette.grey["300"],
-              },
-              "& .evening": {
-                backgroundColor: theme.palette.forecastTheme.evening,
-                color: theme.palette.grey["300"],
-              },
-              "& .sunny": {
-                backgroundColor: theme.palette.forecastTheme.sunny,
-                color: theme.palette.grey["300"],
-              },
-              "& .rainy": {
+              "&.rainy": {
                 backgroundColor: theme.palette.forecastTheme.rainy,
-                color: theme.palette.grey["300"],
+                color: theme.palette.grey["100"],
               },
-              "& .snowy": {
+              "&.snowy": {
                 backgroundColor: theme.palette.forecastTheme.snowy,
                 color: theme.palette.grey["900"],
               },
               [theme.breakpoints.down("md")]: {
-                marginInline: "1.125rem",
                 padding: "0.75rem",
               },
             },
@@ -137,7 +135,6 @@ theme.components = {
           {
             props: { variant: "discreet" },
             style: {
-              width: "100%",
               display: "flex",
               flexDirection: "column",
               rowGap: "0.875rem",
@@ -145,19 +142,14 @@ theme.components = {
               justifyContent: "left",
               borderRadius: 5,
               textAlign: "left",
-              textWrap: "wrap",
-              wordBreak: "break-word",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              "& .contrasting-dark": {
+              "&.contrasting-dark": {
                 backgroundColor: theme.palette.grey["100"],
               },
-              "& .contrasting-light": {
+              "&.contrasting-light": {
                 backgroundColor: theme.palette.grey["400"],
               },
               [theme.breakpoints.down("md")]: {
-                marginInline: "1.125rem",
-                paddingX: "1.25rem",
+                paddingInline: "1.25rem",
                 paddingTop: "0.93rem",
                 paddingBottom: "1rem",
                 height: "19.38rem",
@@ -165,6 +157,15 @@ theme.components = {
             },
           },
         ],
+      },
+    },
+  },
+  MuiDivider: {
+    styleOverrides: {
+      root: {
+        width: "5.25rem",
+        borderTopWidth: "1px",
+        borderTopColor: theme.typography.h1.color,
       },
     },
   },

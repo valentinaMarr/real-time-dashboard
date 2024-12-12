@@ -102,6 +102,7 @@ a {
 
 main {
   background-color: rgba(255, 255, 255, 0.47);
+  padding-inline: 1.43rem;
 }
 
 @media screen and (max-width: 744px) {

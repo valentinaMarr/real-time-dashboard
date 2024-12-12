@@ -12,6 +12,11 @@ import { WelcomeIcon } from "./icons/WelcomeIcon";
 export const WelcomeSection = () => {
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
   const date = new Date();
+  const longDate = Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }).format(date);
   const welcomeMessage: string = useMemo(() => {
     const hours = date.getHours();
     {
@@ -28,21 +33,19 @@ export const WelcomeSection = () => {
   }, []);
 
   return (
-    <Grid2
-      id="welcome-message-container"
-      spacing={{ xs: 1.75, md: "auto" }}
-      component="section"
-    >
+    <Grid2 container id="welcome-message-container" component="section">
       <Grid2
         display="flex"
-        justifyContent="space-between"
+        flexDirection="column"
+        alignItems="center"
         size={{ xs: 12, md: 6 }}
+        rowGap={{ xs: 1.75 }}
       >
         {isMobile && <WelcomeIcon hours={date.getHours()} />}
         <Typography variant="h1">{welcomeMessage}</Typography>
         <Divider />
-        <Stack direction="column" spacing={1}>
-          <Typography> {`${date.getMonth()}, ${date.getDate()}`} </Typography>
+        <Stack direction="column" alignItems="center" spacing={1}>
+          <Typography> {longDate} </Typography>
           {isMobile && <Clock />}
         </Stack>
       </Grid2>
