@@ -94,7 +94,7 @@ export const WeatherSection = () => {
       size={{ xs: 12, md: 6 }}
       aria-label="local weather forecast section"
     >
-      <Paper elevation={1} variant="forecastSection" className="sunny">
+      <Paper elevation={1} variant="themedPaper" className="sunny">
         <Grid size={{ xs: 12, md: 6 }} spacing={{ xs: 1.75 }}>
           <Grid size={{ xs: 12, md: 6 }} aria-labeledby="location">
             <Typography id="location" component="p" variant="body1">

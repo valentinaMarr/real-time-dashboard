@@ -1,25 +1,24 @@
 import { WeatherSection } from "@/components/WeatherSection";
 import { WelcomeSection } from "@/components/WelcomeSection";
-import { Grid2 as Grid } from "@mui/material";
+import Grid2 from "@mui/material/Grid2";
 
 export default function Home() {
   return (
-    <Grid
+    <Grid2
       component="main"
       spacing={{ xs: 1.75 }}
       sx={{
-        paddingInline: {
-          xs: "1rem",
+        paddingTop: {
+          xs: "6.75rem",
         },
-        paddingTop: { xs: "6.75rem" },
       }}
     >
       <WelcomeSection />
       <WeatherSection />
-      <Grid size={{ xs: 12, lg: 6 }}>
+      <Grid2 size={{ xs: 12, lg: 6 }}>
         {/* TO-DO LIST OR MOTIVATIONAL MESSAGES */}
-      </Grid>
-      <Grid size={{ xs: 12, lg: 6 }}>{/* NEWS */}</Grid>
-    </Grid>
+      </Grid2>
+      <Grid2 size={{ xs: 12, lg: 6 }}>{/* NEWS */}</Grid2>
+    </Grid2>
   );
 }

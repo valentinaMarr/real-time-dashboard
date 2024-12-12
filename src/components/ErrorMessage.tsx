@@ -19,8 +19,12 @@ export const ErrorMessage = ({
       spacing={0.5}
     >
       {errorIcon ? <Icon component={errorIcon} /> : <MdOutlineQuestionMark />}
-      <Typography component="h3">{headline}</Typography>
-      <Typography component="p">{body}</Typography>
+      <Typography component="h3" variant="errorMessage">
+        {headline}
+      </Typography>
+      <Typography component="p" variant="body1">
+        {body}
+      </Typography>
     </Stack>
   );
 };

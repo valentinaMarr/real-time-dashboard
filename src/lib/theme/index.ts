@@ -59,6 +59,28 @@ theme.typography = {
       lineHeight: "1.06rem",
     },
   },
+  errorMessage: {
+    fontFamily: "var(--font-alata-regular)",
+    color: "inherit",
+    letterSpacing: "0.5%",
+    fontWeight: 400,
+    [theme.breakpoints.down("md")]: {
+      fontSize: "1.125rem",
+      lineHeight: "1.5rem",
+    },
+  },
+};
+
+theme.palette = {
+  ...theme.palette,
+  forecastTheme: {
+    dawn: "#c2c5ea",
+    sunset: "#d06580",
+    evening: "#6b60bd",
+    sunny: "#d1fffc",
+    rainy: "#394e7a",
+    snowy: "#b1c4d8",
+  },
 };
 
 theme.components = {
@@ -67,6 +89,9 @@ theme.components = {
     styleOverrides: {
       root: {
         width: "100%",
+        [theme.breakpoints.down("md")]: {
+          paddingInline: "1rem",
+        },
       },
     },
   },
@@ -75,25 +100,31 @@ theme.components = {
       root: {
         variants: [
           {
-            props: { variant: "forecastSection" },
+            props: { variant: "themedPaper" },
             style: {
               "& .dawn": {
-                backgroundColor: "#c2c5ea",
+                backgroundColor: theme.palette.forecastTheme.dawn,
+                color: theme.palette.grey["900"],
               },
               "& .sunset": {
-                backgroundColor: "#d06580",
+                backgroundColor: theme.palette.forecastTheme.sunset,
+                color: theme.palette.grey["300"],
               },
               "& .evening": {
-                backgroundColor: "#6b60bd",
+                backgroundColor: theme.palette.forecastTheme.evening,
+                color: theme.palette.grey["300"],
               },
               "& .sunny": {
-                backgroundColor: "#d1fffc",
+                backgroundColor: theme.palette.forecastTheme.sunny,
+                color: theme.palette.grey["300"],
               },
               "& .rainy": {
-                backgroundColor: "#394e7a",
+                backgroundColor: theme.palette.forecastTheme.rainy,
+                color: theme.palette.grey["300"],
               },
               "& .snowy": {
-                backgroundColor: "#b1c4d8",
+                backgroundColor: theme.palette.forecastTheme.snowy,
+                color: theme.palette.grey["900"],
               },
               [theme.breakpoints.down("md")]: {
                 marginInline: "1.125rem",
