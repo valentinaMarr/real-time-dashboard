@@ -1,15 +1,14 @@
 "use client";
 
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Grid2 from "@mui/material/Grid2";
+import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { motion } from "motion/react";
 import { ChangeEvent, useCallback, useState } from "react";
 import { MdArrowForwardIos } from "react-icons/md";
 
-export const Intro = () => {
+const Intro = () => {
   const [userName, setUserName] = useState<string>("User");
   // const router = useRouter()
 
@@ -26,7 +25,18 @@ export const Intro = () => {
   };
 
   return (
-    <Grid2 container maxWidth="md" component="main" size={12}>
+    <Stack
+      component="main"
+      direction="column"
+      spacing={{ xs: 4 }}
+      sx={{
+        width: "100%",
+        height: "100vh",
+        paddingInline: "1rem",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <motion.div
         aria-label="intro-message"
         initial={{
@@ -38,7 +48,7 @@ export const Intro = () => {
           opacity: 1,
         }}
         transition={{
-          duration: "0.5s",
+          duration: 0.5,
         }}
       >
         <Typography component="h2" variant="h2">
@@ -56,7 +66,7 @@ export const Intro = () => {
           opacity: 1,
         }}
         transition={{
-          duration: "0.5s",
+          duration: 0.5,
           delay: 1,
         }}
       >
@@ -64,6 +74,7 @@ export const Intro = () => {
           How would you like to be called?
         </Typography>
       </motion.div>
+
       <motion.div
         aria-label="intro-message"
         initial={{
@@ -75,29 +86,25 @@ export const Intro = () => {
           opacity: 1,
         }}
         transition={{
-          duration: "0.5s",
+          duration: 0.5,
           delay: 2,
         }}
       >
-        <form onSubmit={submit}>
-          <TextField
-            variant="standard"
-            value={userName}
-            onChange={inputChange}
-          />
-        </form>
-        <Button variant="text">
-          Skip{" "}
-          <Box
-            component="span"
-            sx={{
-              display: "inline",
-            }}
-          >
-            <MdArrowForwardIos />
-          </Box>
-        </Button>
+        <Stack direction="column" spacing={0.75} sx={{ width: "fit-content" }}>
+          <form onSubmit={submit}>
+            <TextField
+              variant="standard"
+              value={userName}
+              onChange={inputChange}
+            />
+          </form>
+          <Button variant="text" sx={{ alignSelf: "end" }}>
+            Skip <MdArrowForwardIos />
+          </Button>
+        </Stack>
       </motion.div>
-    </Grid2>
+    </Stack>
   );
 };
+
+export default Intro;

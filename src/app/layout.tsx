@@ -1,5 +1,4 @@
 import { Footer } from "@/components/layout/Footer";
-import { Header } from "@/components/layout/Header";
 import { ProvidersAggrergator } from "@/lib/ProvidersAggrergator";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
@@ -38,11 +37,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${montserrat.variable} ${alataRegular.variable} body-rainy`}
-      >
+      <body className={`${montserrat.variable} ${alataRegular.variable}`}>
         <ProvidersAggrergator>
-          <Header />
           {children}
           <Footer />
         </ProvidersAggrergator>

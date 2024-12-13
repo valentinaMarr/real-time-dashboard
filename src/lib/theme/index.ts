@@ -101,7 +101,7 @@ theme.components = {
       root: {
         width: "100%",
         [theme.breakpoints.down("md")]: {
-          paddingX: "1rem",
+          paddingInline: "1rem",
         },
       },
     },
@@ -177,6 +177,36 @@ theme.components = {
         width: "5.25rem",
         borderTopWidth: "1px",
         borderTopColor: theme.typography.h1.color,
+      },
+    },
+  },
+  MuiTextField: {
+    styleOverrides: {
+      root: {
+        borderColor: theme.palette.grey["900"],
+        "& .MuiInputBase-root": {
+          animation: "none",
+        },
+      },
+    },
+  },
+  MuiButton: {
+    styleOverrides: {
+      root: {
+        variants: {
+          props: {
+            variant: "text",
+          },
+          style: {
+            display: "flex",
+            alignItems: "center",
+            fontWeight: 500,
+            textTransform: "capitalize",
+            [theme.breakpoints.down("md")]: {
+              fontSize: "0.875rem",
+            },
+          },
+        },
       },
     },
   },
