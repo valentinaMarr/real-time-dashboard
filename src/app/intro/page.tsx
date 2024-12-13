@@ -5,24 +5,47 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { motion } from "motion/react";
+import { useRouter } from "next/navigation";
 import { ChangeEvent, useCallback, useState } from "react";
 import { MdArrowForwardIos } from "react-icons/md";
 
 const Intro = () => {
   const [userName, setUserName] = useState<string>("User");
-  // const router = useRouter()
+  const [inputError, setInputError] = useState<{
+    status: boolean;
+    message?: string;
+  }>({ status: false });
+  const router = useRouter();
 
   const inputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUserName(e.target.value);
   };
-  const submit = useCallback(() => {
-    console.log("user name", userName);
-  }, [userName]);
-  const skip = () => {
-    submit();
 
-    // redirect to homepage
-  };
+  const submit = useCallback(async () => {
+    const response = await fetch("./api/rememberUser", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userName),
+    });
+
+    if (response.status !== 200) {
+      const requestJson = await response.json();
+
+      setInputError({ status: true, message: requestJson.message });
+      return;
+    }
+
+    router.push("/");
+  }, [userName, router, setInputError]);
+
+  const skip = useCallback(() => {
+    setUserName("User");
+
+    setTimeout(() => submit(), 10);
+  }, [submit, setUserName]);
 
   return (
     <Stack
@@ -35,6 +58,7 @@ const Intro = () => {
         paddingInline: "1rem",
         justifyContent: "center",
         alignItems: "center",
+        textAlign: "center",
       }}
     >
       <motion.div
@@ -91,14 +115,20 @@ const Intro = () => {
         }}
       >
         <Stack direction="column" spacing={0.75} sx={{ width: "fit-content" }}>
-          <form onSubmit={submit}>
+          <form onSubmit={() => submit()}>
             <TextField
               variant="standard"
               value={userName}
               onChange={inputChange}
+              error={inputError.status}
+              helperText={inputError?.message}
             />
           </form>
-          <Button variant="text" sx={{ alignSelf: "end" }}>
+          <Button
+            variant="text"
+            sx={{ alignSelf: "end" }}
+            onClick={() => skip()}
+          >
             Skip <MdArrowForwardIos />
           </Button>
         </Stack>

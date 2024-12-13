@@ -35,6 +35,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // TODO: ADD QUERY CLIENT
   return (
     <html lang="en">
       <body className={`${montserrat.variable} ${alataRegular.variable}`}>
