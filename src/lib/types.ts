@@ -11,6 +11,6 @@ export type ForecastDetails = {
 export type NewsDetails = {
   headline: string;
   imgSrc?: string;
-  articleBody: string;
-  articleUrl: string;
+  reportBody: string;
+  reportUrl: string;
 };

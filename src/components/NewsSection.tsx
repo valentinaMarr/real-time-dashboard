@@ -5,13 +5,13 @@ import Typography from "@mui/material/Typography";
 import { NewsPaper } from "./NewsPaper";
 
 export const NewsSection = () => {
-  const articles = new Array(5).fill({
+  const reports = new Array(5).fill({
     headline: "An important title",
     imgSrc:
       "https://images.pexels.com/photos/21627/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    articleBody:
+    reportBody:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto fugit, perspiciatis voluptas provident, accusantium consectetur quos, corporis vero in eius sit! Quia, aut natus provident ipsum error eius. Quia, fugiat!",
-    articleUrl: "#",
+    reportUrl: "#",
   });
   return (
     <Grid2
@@ -41,11 +41,11 @@ export const NewsSection = () => {
           rowGap: "1.375rem",
         }}
       >
-        {articles?.map((item: NewsDetails, index) => (
+        {reports?.map((item: NewsDetails, index) => (
           <NewsPaper
-            key={`article-card-${index}`}
-            articleBody={item.articleBody}
-            articleUrl={item.articleUrl}
+            key={`report-card-${index}`}
+            reportBody={item.reportBody}
+            reportUrl={item.reportUrl}
             headline={item.headline}
             imgSrc={item.imgSrc}
           />

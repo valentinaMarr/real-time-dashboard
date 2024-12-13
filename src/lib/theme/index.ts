@@ -69,6 +69,17 @@ theme.typography = {
       lineHeight: "1.5rem",
     },
   },
+  a: {
+    textTransform: "uppercase",
+    fontFamily: "var(--font-montserrat)",
+    color: "inherit",
+    letterSpacing: "1%",
+    fontWeight: 500,
+    [theme.breakpoints.down("md")]: {
+      fontSize: "0.875rem",
+      lineHeight: "1.06rem",
+    },
+  },
 };
 
 theme.palette = {

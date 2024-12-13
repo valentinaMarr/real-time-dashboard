@@ -14,10 +14,12 @@ declare module "@mui/material/styles" {
 
   interface TypographyVariants {
     errorMessage: React.CSSProperties;
+    a: React.CSSProperties;
   }
 
   interface TypographyVariantsOptions {
     errorMessage?: React.CSSProperties;
+    a?: React.CSSProperties;
   }
 }
 
@@ -48,6 +50,7 @@ declare module "@material-ui/core/styles/createPalette" {
 declare module "@mui/material/Typography" {
   interface TypographyPropsVariantOverrides {
     errorMessage: true;
+    a: true;
   }
 }
 
