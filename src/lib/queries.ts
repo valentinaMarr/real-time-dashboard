@@ -77,3 +77,21 @@ export function useGetNewsReports() {
     refetchOnReconnect: false,
   });
 }
+
+export function useGetUserName() {
+  return useQuery({
+    queryKey: ["userName"],
+    queryFn: async () => {
+      const response = await fetch("/api/getUserNickname");
+      if (response.status !== 200) {
+        return "stranger";
+      }
+      const result = await response.json();
+
+      return result.message;
+    },
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+  });
+}

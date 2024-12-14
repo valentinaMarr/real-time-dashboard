@@ -4,15 +4,18 @@ import { Header } from "@/components/layout/Header";
 import { NewsSection } from "@/components/NewsSection";
 import { WeatherSection } from "@/components/WeatherSection";
 import { WelcomeSection } from "@/components/WelcomeSection";
-import { useGetLocalForecast, useGetNewsReports } from "@/lib/queries";
+import {
+  useGetLocalForecast,
+  useGetNewsReports,
+  useGetUserName,
+} from "@/lib/queries";
 import { Forecast, ForecastDetails, NewsDetails } from "@/lib/types";
 import Grid2 from "@mui/material/Grid2";
 import Skeleton from "@mui/material/Skeleton";
+import { useIsFetching } from "@tanstack/react-query";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 export default function Home() {
-  // const [{ forecast, countryCode, location }, setAtom] = useAtom(realTimeData);
-
   // GET COORDINATES
   const [{ longitude, latitude }, setCoords] = useState<{
     latitude: number;
@@ -68,9 +71,8 @@ export default function Home() {
   }, [getLocation]);
 
   // QUERIES
-  const { data: geolocationData, pending: geolocationPending } =
-    useGetLocalForecast(latitude, longitude);
-  const { data: newsData, isLoading: newsLoading } = useGetNewsReports();
+  const { data: geolocationData } = useGetLocalForecast(latitude, longitude);
+  const { data: newsData } = useGetNewsReports();
 
   const locationDetails: ForecastDetails = useMemo(() => {
     const geolocationResults = geolocationData?.[1]?.[0];
@@ -103,6 +105,17 @@ export default function Home() {
     return articles || [];
   }, [newsData]);
 
+  const { data: userName } = useGetUserName();
+
+  const queriesAreFetching = useIsFetching({
+    queryKey: [
+      "username",
+      "getNewsReports",
+      "getWeatherForecast",
+      "getLocalInfo",
+    ],
+  });
+
   // THEMING
   const weatherKey: Forecast = useMemo(() => {
     const forecastDescription = locationDetails.description;
@@ -129,15 +142,20 @@ export default function Home() {
         component="main"
         container
         maxWidth="100vw"
+        minHeight="100vh"
         spacing={{ xs: 12 }}
         sx={{
-          paddingTop: {
+          paddingBlock: {
             xs: "6.75rem",
           },
         }}
       >
-        <WelcomeSection />
-        {geolocationPending ? (
+        {queriesAreFetching > 0 ? (
+          <SkeletonGridCell />
+        ) : (
+          <WelcomeSection userName={userName} />
+        )}
+        {queriesAreFetching > 0 ? (
           <SkeletonGridCell />
         ) : (
           <WeatherSection
@@ -145,7 +163,7 @@ export default function Home() {
             themeKey={weatherKey}
           />
         )}
-        {newsLoading ? (
+        {queriesAreFetching > 0 ? (
           <SkeletonGridCell />
         ) : (
           <NewsSection articles={newsDetails} />
@@ -162,7 +180,8 @@ const SkeletonGridCell = () => {
       size={{ xs: 12, md: 6 }}
       aria-label="section loading"
     >
-      <Skeleton width="100%" />
+      <Skeleton width="100%" height="18.75rem" />
     </Grid2>
   );
 };
+

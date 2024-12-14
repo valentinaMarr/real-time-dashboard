@@ -1,10 +1,10 @@
 import { NewsDetails } from "@/lib/types";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Image from "next/image";
-import Link from "next/link";
 
 export const NewsPaper = ({
   headline,
@@ -57,16 +57,10 @@ export const NewsPaper = ({
           {reportBody}
         </Typography>
       </Stack>
-      <Link href={reportUrl} target="_blank">
-        <Typography
-          component="p"
-          variant="a"
-          sx={{ textAlign: "center", textTransform: "uppercase" }}
-        >
-          {" "}
-          Read more
-        </Typography>
-      </Link>
+      <Button variant="text" component="a" href={reportUrl} target="_blank">
+        {" "}
+        Read more
+      </Button>
     </Paper>
   );
 };

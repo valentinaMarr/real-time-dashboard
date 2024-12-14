@@ -13,10 +13,17 @@ export const ErrorMessage = ({
 }) => {
   return (
     <Stack
-      aria-label="error message"
-      component="span"
+      component="main"
       direction="column"
-      spacing={0.5}
+      spacing={{ xs: 2 }}
+      sx={{
+        width: "100%",
+        height: "100vh",
+        paddingInline: "1rem",
+        justifyContent: "center",
+        alignItems: "center",
+        alignContent: "center",
+      }}
     >
       {errorIcon ? <Icon component={errorIcon} /> : <MdOutlineQuestionMark />}
       <Typography component="h3" variant="errorMessage">

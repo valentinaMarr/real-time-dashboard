@@ -4,7 +4,6 @@ import { Stack, useMediaQuery } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
-import { clearTimeout } from "timers";
 
 export const Clock = () => {
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
@@ -23,8 +22,6 @@ export const Clock = () => {
     };
 
     const timer = setTimeout(() => setTime(currentTime), 1000);
-
-    return () => clearTimeout(timer);
   }, [setTime]);
 
   if (isMobile) {

@@ -40,11 +40,11 @@ const Intro = () => {
     redirect(appUrl as string);
   }, [userName, setInputError]);
 
-  const skip = useCallback(async () => {
+  const skip = useCallback(() => {
     setUserName("User");
 
     submit();
-  }, [submit, setUserName]);
+  }, [userName, submit, setUserName]);
 
   return (
     <Stack
@@ -114,7 +114,12 @@ const Intro = () => {
         }}
       >
         <Stack direction="column" spacing={0.75} sx={{ width: "fit-content" }}>
-          <form onSubmit={() => submit()}>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              submit();
+            }}
+          >
             <TextField
               variant="standard"
               value={userName}
@@ -124,11 +129,7 @@ const Intro = () => {
               placeholder="User"
             />
           </form>
-          <Button
-            variant="text"
-            sx={{ alignSelf: "end" }}
-            onClick={() => skip()}
-          >
+          <Button variant="text" onClick={skip}>
             Skip <MdArrowForwardIos />
           </Button>
         </Stack>

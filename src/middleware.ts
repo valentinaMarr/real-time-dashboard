@@ -4,13 +4,11 @@ import { NextResponse } from "next/server";
 export function middleware(request: NextRequest) {
   const hasName = request.cookies.get("userName");
   const origin = request.nextUrl.origin;
-  const pathname = request.nextUrl.pathname;
 
   if (!hasName) {
     return NextResponse.redirect(`${origin}/intro`);
-  } else if (hasName && pathname == "/intro") {
-    return NextResponse.redirect(`${origin}/`);
   }
+
   return NextResponse.next();
 }
 

@@ -1,11 +1,7 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
-type ResponseData = {
-  message: string;
-};
-
-export default async function GET(_req: Request) {
+export async function GET(_req: Request) {
   const cookieStore = await cookies();
   const nicknameCookie = cookieStore.get("userName");
 
@@ -15,6 +11,9 @@ export default async function GET(_req: Request) {
       { status: 500 }
     );
   }
+
+  console.log("nickname value", nicknameCookie);
+
   return new NextResponse(JSON.stringify({ message: nicknameCookie.value }), {
     status: 200,
   });

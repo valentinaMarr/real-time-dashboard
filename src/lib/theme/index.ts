@@ -152,12 +152,6 @@ theme.components = {
               alignItems: "stretch",
               justifyContent: "left",
               borderRadius: 5,
-              "&.contrasting-dark": {
-                backgroundColor: theme.palette.grey["100"],
-              },
-              "&.contrasting-light": {
-                backgroundColor: theme.palette.grey["400"],
-              },
               [theme.breakpoints.down("md")]: {
                 paddingInline: "1.25rem",
                 paddingTop: "0.93rem",
@@ -192,20 +186,25 @@ theme.components = {
   MuiButton: {
     styleOverrides: {
       root: {
-        variants: {
-          props: {
-            variant: "text",
-          },
-          style: {
-            display: "flex",
-            alignItems: "center",
-            fontWeight: 600,
-            textTransform: "capitalize",
-            [theme.breakpoints.down("md")]: {
-              fontSize: "0.875rem",
+        variants: [
+          {
+            props: {
+              variant: "text",
+            },
+            style: {
+              display: "flex",
+              alignItems: "center",
+              fontFamily: "var(--font-montserrat)",
+              fontWeight: 600,
+              textTransform: "uppercase",
+              alignSelf: "end",
+              color: "inherit",
+              [theme.breakpoints.down("md")]: {
+                fontSize: "0.875rem",
+              },
             },
           },
-        },
+        ],
       },
     },
   },
