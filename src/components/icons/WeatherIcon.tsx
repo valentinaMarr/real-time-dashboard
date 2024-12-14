@@ -14,9 +14,8 @@ export const WeatherIcon = ({ forecastIcon }: { forecastIcon: string }) => {
     >
       <img
         alt="forecast icon"
-        src={`https://openweathermap.org/img/wn/10d@${forecastIcon}.png`}
-        width="100%"
-        height="3.38rem"
+        src={`https://openweathermap.org/img/wn/${forecastIcon}@2x.png`}
+        width="auto"
       />
     </Box>
   );

@@ -5,46 +5,45 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { motion } from "motion/react";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { ChangeEvent, useCallback, useState } from "react";
 import { MdArrowForwardIos } from "react-icons/md";
 
+const appUrl = process.env.NEXT_PUBLIC_APPURL;
+
 const Intro = () => {
-  const [userName, setUserName] = useState<string>("User");
+  const [userName, setUserName] = useState<string>("");
   const [inputError, setInputError] = useState<{
     status: boolean;
     message?: string;
   }>({ status: false });
-  const router = useRouter();
 
   const inputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUserName(e.target.value);
   };
 
   const submit = useCallback(async () => {
-    const response = await fetch("./api/rememberUser", {
+    const response = await fetch("/api/rememberUser", {
       method: "POST",
       headers: {
-        Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(userName),
+      body: JSON.stringify({ userName }),
     });
 
+    const requestJson = await response.json();
     if (response.status !== 200) {
-      const requestJson = await response.json();
-
       setInputError({ status: true, message: requestJson.message });
       return;
     }
 
-    router.push("/");
-  }, [userName, router, setInputError]);
+    redirect(appUrl as string);
+  }, [userName, setInputError]);
 
-  const skip = useCallback(() => {
+  const skip = useCallback(async () => {
     setUserName("User");
 
-    setTimeout(() => submit(), 10);
+    submit();
   }, [submit, setUserName]);
 
   return (
@@ -122,6 +121,7 @@ const Intro = () => {
               onChange={inputChange}
               error={inputError.status}
               helperText={inputError?.message}
+              placeholder="User"
             />
           </form>
           <Button

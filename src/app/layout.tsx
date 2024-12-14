@@ -1,9 +1,7 @@
 import { Footer } from "@/components/layout/Footer";
 import { ProvidersAggrergator } from "@/lib/ProvidersAggrergator";
 import type { Metadata } from "next";
-import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import localFont from "next/font/local";
-import ErrorPage from "./error";
 import "./globals.css";
 
 const alataRegular = localFont({
@@ -46,18 +44,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${montserrat.variable} ${alataRegular.variable}`}>
         <ProvidersAggrergator>
-          <ErrorBoundary
-            errorComponent={({
-              error,
-              reset,
-            }: {
-              error: Error;
-              reset: () => void;
-            }) => <ErrorPage error={error} reset={reset} />}
-          >
-            {children}
-            <Footer />
-          </ErrorBoundary>
+          {children}
+          <Footer />
         </ProvidersAggrergator>
       </body>
     </html>

@@ -1,3 +1,4 @@
+"use client";
 import { ErrorMessage } from "@/components/ErrorMessage";
 import { Stack } from "@mui/material";
 import { MdErrorOutline } from "react-icons/md";

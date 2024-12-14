@@ -19,7 +19,7 @@ export const WelcomeSection = () => {
   }).format(date);
   const welcomeMessage = useMemo(async () => {
     const hours = date.getHours();
-    const getNicknameResponse = await fetch("../../api/getUserNickname");
+    const getNicknameResponse = await fetch("/api/getUserNickname");
 
     if (getNicknameResponse.status !== 200) {
       return "Hello, stranger";

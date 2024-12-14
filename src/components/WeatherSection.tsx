@@ -72,7 +72,7 @@ export const WeatherSection = ({
             aria-label="weather forecast"
           >
             <Typography component="h2" variant="h2">
-              {temperature}
+              {temperature}°
             </Typography>
             <Typography component="h4" variant="h4">
               {description}
