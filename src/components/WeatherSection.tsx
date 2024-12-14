@@ -11,8 +11,10 @@ import { WeatherIcon } from "./icons/WeatherIcon";
 
 export const WeatherSection = ({
   forecastDetails,
+  themeKey,
 }: {
   forecastDetails: ForecastDetails;
+  themeKey: string;
 }) => {
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
   const { city, state, temperature, description, icon } = forecastDetails;
@@ -43,7 +45,7 @@ export const WeatherSection = ({
       size={{ xs: 12, md: 6 }}
       aria-label="local weather forecast section"
     >
-      <Paper elevation={1} variant="themedPaper" className={`rainy`}>
+      <Paper elevation={1} variant="themedPaper" className={themeKey}>
         <Grid2
           container
           size={{ xs: 12, md: 6 }}

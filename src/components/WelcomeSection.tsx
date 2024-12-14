@@ -17,19 +17,21 @@ export const WelcomeSection = () => {
     month: "long",
     day: "numeric",
   }).format(date);
-  const welcomeMessage: string = useMemo(() => {
+  const welcomeMessage = useMemo(async () => {
     const hours = date.getHours();
-    {
-      /* TO-DO: DYNAMICALLY CHANGE THE NAME */
+    const getNicknameResponse = await fetch("../../api/getUserNickname");
+
+    if (getNicknameResponse.status !== 200) {
+      return "Hello, stranger";
     }
 
-    const userName = "Valentina";
+    const userName = await getNicknameResponse.json();
 
     if (hours > 3 && hours < 18) {
-      return `Good morning, ${userName}`;
+      return `Good morning, ${userName.message}`;
     }
 
-    return `Good evening, ${userName}`;
+    return `Good evening, ${userName.message}`;
   }, []);
 
   return (

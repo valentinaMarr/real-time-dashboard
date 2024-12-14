@@ -5,7 +5,7 @@ import { NewsSection } from "@/components/NewsSection";
 import { WeatherSection } from "@/components/WeatherSection";
 import { WelcomeSection } from "@/components/WelcomeSection";
 import { useGetLocalForecast, useGetNewsReports } from "@/lib/queries";
-import { ForecastDetails, NewsDetails } from "@/lib/types";
+import { Forecast, ForecastDetails, NewsDetails } from "@/lib/types";
 import Grid2 from "@mui/material/Grid2";
 import Skeleton from "@mui/material/Skeleton";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -79,7 +79,7 @@ export default function Home() {
     return {
       city: geolocationResults?.name || "",
       state: geolocationResults?.state || "",
-      description: weatherResults?.weather?.[0]?.main || "",
+      description: weatherResults?.weather?.[0]?.description || "",
       icon: weatherResults?.weather?.[0]?.icon || "",
       temperature: weatherResults?.main?.temp || "",
       min_temperature: weatherResults?.main?.temp_min || "",
@@ -103,6 +103,25 @@ export default function Home() {
     return articles || [];
   }, [newsData]);
 
+  // THEMING
+  const weatherKey: Forecast = useMemo(() => {
+    const forecastDescription = locationDetails.description;
+
+    switch (forecastDescription) {
+      case "clear sky":
+        return "sunny";
+      case "snow":
+        return "snowy";
+      default:
+        return "rainy";
+    }
+  }, [locationDetails]);
+
+  useEffect(() => {
+    const body = document.getElementsByTagName("body");
+    body[0].classList.add(`body-${weatherKey}`);
+  }, [weatherKey]);
+
   return (
     <>
       <Header />
@@ -121,7 +140,10 @@ export default function Home() {
         {geolocationPending ? (
           <SkeletonGridCell />
         ) : (
-          <WeatherSection forecastDetails={locationDetails} />
+          <WeatherSection
+            forecastDetails={locationDetails}
+            themeKey={weatherKey}
+          />
         )}
         {newsLoading ? (
           <SkeletonGridCell />
