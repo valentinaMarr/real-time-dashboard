@@ -11,6 +11,7 @@ export const NewsPaper = ({
   imgSrc,
   reportBody,
   reportUrl,
+  source,
 }: NewsDetails) => {
   return (
     <Paper elevation={1} component="article" variant="discreet">
@@ -45,6 +46,9 @@ export const NewsPaper = ({
           wordBreak: "break-word",
         }}
       >
+        <Typography component="h4" variant="body1">
+          {source}
+        </Typography>
         <Typography component="h3" variant="h3">
           {headline}
         </Typography>

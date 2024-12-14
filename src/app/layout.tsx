@@ -1,7 +1,9 @@
 import { Footer } from "@/components/layout/Footer";
 import { ProvidersAggrergator } from "@/lib/ProvidersAggrergator";
 import type { Metadata } from "next";
+import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import localFont from "next/font/local";
+import ErrorPage from "./error";
 import "./globals.css";
 
 const alataRegular = localFont({
@@ -12,6 +14,10 @@ const alataRegular = localFont({
 });
 const montserrat = localFont({
   src: [
+    {
+      path: "./fonts/Montserrat-SemiBold.ttf",
+      weight: "600",
+    },
     {
       path: "./fonts/Montserrat-Medium.ttf",
       weight: "500",
@@ -40,8 +46,18 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${montserrat.variable} ${alataRegular.variable}`}>
         <ProvidersAggrergator>
-          {children}
-          <Footer />
+          <ErrorBoundary
+            errorComponent={({
+              error,
+              reset,
+            }: {
+              error: Error;
+              reset: () => void;
+            }) => <ErrorPage error={error} reset={reset} />}
+          >
+            {children}
+            <Footer />
+          </ErrorBoundary>
         </ProvidersAggrergator>
       </body>
     </html>

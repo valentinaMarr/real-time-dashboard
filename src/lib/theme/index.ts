@@ -60,10 +60,10 @@ theme.typography = {
     },
   },
   errorMessage: {
-    fontFamily: "var(--font-alata-regular)",
+    fontFamily: "var(--font-montserrat)",
     color: "inherit",
     letterSpacing: "0.5%",
-    fontWeight: 400,
+    fontWeight: 600,
     [theme.breakpoints.down("md")]: {
       fontSize: "1.125rem",
       lineHeight: "1.5rem",
@@ -200,7 +200,7 @@ theme.components = {
           style: {
             display: "flex",
             alignItems: "center",
-            fontWeight: 500,
+            fontWeight: 600,
             textTransform: "capitalize",
             [theme.breakpoints.down("md")]: {
               fontSize: "0.875rem",

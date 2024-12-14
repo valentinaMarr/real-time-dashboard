@@ -4,15 +4,7 @@ import Grid2 from "@mui/material/Grid2";
 import Typography from "@mui/material/Typography";
 import { NewsPaper } from "./NewsPaper";
 
-export const NewsSection = () => {
-  const reports = new Array(5).fill({
-    headline: "An important title",
-    imgSrc:
-      "https://images.pexels.com/photos/21627/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    reportBody:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto fugit, perspiciatis voluptas provident, accusantium consectetur quos, corporis vero in eius sit! Quia, aut natus provident ipsum error eius. Quia, fugiat!",
-    reportUrl: "#",
-  });
+export const NewsSection = ({ articles }: { articles: Array<NewsDetails> }) => {
   return (
     <Grid2
       container
@@ -41,13 +33,14 @@ export const NewsSection = () => {
           rowGap: "1.375rem",
         }}
       >
-        {reports?.map((item: NewsDetails, index) => (
+        {articles?.map((item: NewsDetails, index) => (
           <NewsPaper
             key={`report-card-${index}`}
             reportBody={item.reportBody}
             reportUrl={item.reportUrl}
             headline={item.headline}
             imgSrc={item.imgSrc}
+            source={item?.source}
           />
         ))}
       </Grid2>

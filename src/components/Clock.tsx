@@ -4,6 +4,7 @@ import { Stack, useMediaQuery } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
+import { clearTimeout } from "timers";
 
 export const Clock = () => {
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
@@ -12,7 +13,8 @@ export const Clock = () => {
     hours: new Date().getHours().toString(),
     minutes: new Date().getMinutes().toString(),
   });
-  const getTime = () => {
+
+  useEffect(() => {
     const minutesNumber = new Date().getMinutes();
     const currentTime: { hours: string; minutes: string } = {
       hours: new Date().getHours().toString(),
@@ -20,12 +22,10 @@ export const Clock = () => {
         minutesNumber < 10 ? `0${minutesNumber}` : minutesNumber.toString(),
     };
 
-    setTimeout(() => setTime(currentTime), 1000);
-  };
+    const timer = setTimeout(() => setTime(currentTime), 1000);
 
-  useEffect(() => {
-    getTime();
-  }, [time]);
+    return () => clearTimeout(timer);
+  }, [setTime]);
 
   if (isMobile) {
     return (

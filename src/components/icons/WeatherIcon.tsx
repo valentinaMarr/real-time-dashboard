@@ -1,10 +1,6 @@
-import { Forecast } from "@/lib/types";
 import { Box } from "@mui/material";
-import { IoMdRainy } from "react-icons/io";
-import { MdOutlineWbSunny } from "react-icons/md";
-import { RiSnowyFill } from "react-icons/ri";
 
-export const WeatherIcon = ({ forecast }: { forecast: Forecast }) => {
+export const WeatherIcon = ({ forecastIcon }: { forecastIcon: string }) => {
   return (
     <Box
       aria-hidden="true"
@@ -16,13 +12,12 @@ export const WeatherIcon = ({ forecast }: { forecast: Forecast }) => {
         backgroundColor: "transparent",
       }}
     >
-      {forecast === "rainy" ? (
-        <IoMdRainy />
-      ) : forecast === "snowy" ? (
-        <RiSnowyFill />
-      ) : (
-        <MdOutlineWbSunny />
-      )}
+      <img
+        alt="forecast icon"
+        src={`https://openweathermap.org/img/wn/10d@${forecastIcon}.png`}
+        width="100%"
+        height="3.38rem"
+      />
     </Box>
   );
 };
