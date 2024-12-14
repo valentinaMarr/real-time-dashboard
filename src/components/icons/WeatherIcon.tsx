@@ -1,21 +1,22 @@
 import { Box } from "@mui/material";
+import Image from "next/image";
 
 export const WeatherIcon = ({ forecastIcon }: { forecastIcon: string }) => {
   return (
     <Box
       aria-hidden="true"
       sx={{
-        height: "3.68rem",
-        width: "auto",
-        color: "inherit",
-        fontSize: "3rem",
+        width: "3.12rem",
+        height: "3.12rem",
+        justifySelf: "center",
         backgroundColor: "transparent",
+        position: "relative",
       }}
     >
-      <img
+      <Image
         alt="forecast icon"
         src={`https://openweathermap.org/img/wn/${forecastIcon}@2x.png`}
-        width="auto"
+        fill
       />
     </Box>
   );

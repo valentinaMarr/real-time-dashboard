@@ -14,15 +14,15 @@ export const NewsPaper = ({
   source,
 }: NewsDetails) => {
   return (
-    <Paper elevation={1} component="article" variant="discreet">
+    <Paper elevation={1} component="div" variant="discreet">
       {imgSrc && (
         <Box
           sx={{
             position: "relative",
-            height: {
-              xs: "10rem",
-            },
             width: "100%",
+            height: {
+              xs: "15rem",
+            },
           }}
         >
           <Image
@@ -32,18 +32,19 @@ export const NewsPaper = ({
             style={{
               objectFit: "cover",
             }}
+            priority
           />
         </Box>
       )}
       <Stack
         direction="column"
-        component="span"
+        component="article"
         spacing={1}
         sx={{
-          height: "13vh",
-          overflow: "hidden",
           textOverflow: "ellipsis",
           wordBreak: "break-word",
+          height: "fit-content",
+          maxHeight: { xs: "30rem" },
         }}
       >
         <Typography component="h4" variant="body1">

@@ -81,11 +81,11 @@ export default function Home() {
       state: geolocationResults?.state || "",
       description: weatherResults?.weather?.[0]?.description || "",
       icon: weatherResults?.weather?.[0]?.icon || "",
-      temperature: weatherResults?.main?.temp || "",
-      min_temperature: weatherResults?.main?.temp_min || "",
-      max_temperature: weatherResults?.main?.temp_max || "",
-      humidity: weatherResults?.main?.humidity || "",
-      wind: weatherResults?.wind?.speed || "",
+      temperature: `${weatherResults?.main?.temp.toFixed(0)}°` || "",
+      min_temperature: `${weatherResults?.main?.temp_min.toFixed(0)}°` || "",
+      max_temperature: `${weatherResults?.main?.temp_max.toFixed(0)}°` || "",
+      humidity: `${weatherResults?.main?.humidity}%` || "",
+      wind: `${weatherResults?.wind?.speed} m/s` || "",
     };
   }, [geolocationData]);
 

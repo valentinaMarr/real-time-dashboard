@@ -152,7 +152,6 @@ theme.components = {
               alignItems: "stretch",
               justifyContent: "left",
               borderRadius: 5,
-              textAlign: "left",
               "&.contrasting-dark": {
                 backgroundColor: theme.palette.grey["100"],
               },
@@ -163,7 +162,7 @@ theme.components = {
                 paddingInline: "1.25rem",
                 paddingTop: "0.93rem",
                 paddingBottom: "1rem",
-                height: "19.38rem",
+                height: "30rem",
               },
             },
           },

@@ -1,7 +1,6 @@
 "use client";
 import { ForecastDetails } from "@/lib/types";
 import { useMediaQuery } from "@mui/material";
-import Divider from "@mui/material/Divider";
 import Grid2 from "@mui/material/Grid2";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
@@ -72,46 +71,54 @@ export const WeatherSection = ({
             aria-label="weather forecast"
           >
             <Typography component="h2" variant="h2">
-              {temperature}°
+              {temperature}
             </Typography>
             <Typography component="h4" variant="h4">
               {description}
             </Typography>
           </Grid2>
-          <Grid2 size={{ xs: 12, md: 6 }} wrap="wrap">
-            <Stack
-              direction={{ xs: "row", md: "column" }}
-              divider={!isMobile ? <Divider orientation="horizontal" /> : null}
-              display="flex"
-              justifyContent="space-between"
-            >
-              {Object.entries(detailsListInfo).map((item, index) => {
-                if (item[0] === "temperature" || item[0] === "description") {
-                  return null;
-                }
+          <Grid2
+            size={{ xs: 12, md: 6 }}
+            aria-label="weather forecast"
+            sx={{
+              paddingTop: 4,
+              gap: { xs: 2 },
+              columns: { xs: 3 },
+              display: "flex",
+              justifyContent: "space-between",
+              flexWrap: "wrap",
+            }}
+          >
+            {Object.entries(detailsListInfo).map((item, index) => {
+              if (item[0] === "temperature" || item[0] === "description") {
+                return null;
+              }
 
-                const noUnderscores = item[0].toString().replaceAll("_", " ");
+              const noUnderscores = item[0].toString().split("_")[0];
 
-                return (
-                  <Stack
-                    component="span"
-                    direction={{ xs: "column", md: "row" }}
-                    key={`weather-details-span-${index}`}
+              return (
+                <Stack
+                  sx={{
+                    maxWidth: {
+                      xs: "33%",
+                    },
+                  }}
+                  direction={{ xs: "column", md: "row" }}
+                  key={`weather-details-grid-cell-${index}`}
+                >
+                  <Typography
+                    component="p"
+                    variant="body1"
+                    sx={{ textTransform: "capitalize" }}
                   >
-                    <Typography
-                      component="p"
-                      variant="body1"
-                      sx={{ textTransform: "capitalize" }}
-                    >
-                      {noUnderscores}
-                    </Typography>
-                    <Typography component="p" variant="body1">
-                      {item[1]}
-                    </Typography>
-                  </Stack>
-                );
-              })}
-            </Stack>
+                    {noUnderscores}
+                  </Typography>
+                  <Typography component="p" variant="body1">
+                    {item[1]}
+                  </Typography>
+                </Stack>
+              );
+            })}
           </Grid2>
         </Grid2>
       </Paper>

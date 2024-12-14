@@ -43,7 +43,7 @@ export const WelcomeSection = () => {
         size={{ xs: 12, md: 6 }}
         rowGap={{ xs: 1.75 }}
       >
-        {isMobile && <WelcomeIcon hours={date.getHours()} />}
+        {isMobile && <WelcomeIcon />}
         <Typography variant="h1">{welcomeMessage}</Typography>
         <Divider />
         <Stack direction="column" alignItems="center" spacing={1}>

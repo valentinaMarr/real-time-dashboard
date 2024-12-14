@@ -105,8 +105,6 @@ main {
   padding-inline: 1.43rem;
 }
 
-@media screen and (max-width: 744px) {
-  header {
-    padding: 0.5rem;
-  }
+header {
+  position: relative;
 }
