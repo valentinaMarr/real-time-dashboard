@@ -1,5 +1,7 @@
 "use client";
 
+import { FadeInOutContainer } from "@/components/animated-containers/FadeInOutContainer";
+import { SlideToTopContainer } from "@/components/animated-containers/SlideToTopContainer";
 import { Header } from "@/components/layout/Header";
 import { Loading } from "@/components/Loading";
 import { NewsSection } from "@/components/NewsSection";
@@ -63,7 +65,7 @@ export default function Home() {
     );
 
     return currentLocation;
-  }, [writeLocation, writeError]);
+  }, [writeError, writeLocation]);
 
   useEffect(() => {
     getLocation();
@@ -176,7 +178,7 @@ export default function Home() {
   }
 
   return (
-    <>
+    <FadeInOutContainer>
       <Header
         sunrise={timeKeys.sunriseTime as number}
         sunset={timeKeys.sunsetTime as number}
@@ -187,12 +189,16 @@ export default function Home() {
         container
         maxWidth="100vw"
         size={{ xs: 12 }}
-        spacing={{ xs: 12, md: 12 }}
+        columns={12}
         sx={{
+          display: { md: "flex" },
+          justifyContent: { md: "space-between" },
           paddingInline: { xs: "1.5rem", md: "2rem" },
           paddingBlock: {
             xs: "6.75rem",
           },
+          rowGap: "6rem",
+          columnGap: 0,
         }}
       >
         <WelcomeSection
@@ -206,8 +212,10 @@ export default function Home() {
           themeKey={weatherKey}
           error={geolocationError[0]}
         />
-        <NewsSection articles={newsDetails} error={reportsError} />
+        <SlideToTopContainer delay={1}>
+          <NewsSection articles={newsDetails} error={reportsError} />
+        </SlideToTopContainer>
       </Grid2>
-    </>
+    </FadeInOutContainer>
   );
 }

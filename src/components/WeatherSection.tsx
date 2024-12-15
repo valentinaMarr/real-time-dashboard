@@ -30,7 +30,7 @@ export const WeatherSection = ({
     <Grid2
       container
       component="section"
-      size={{ xs: 12, md: 4 }}
+      size={{ xs: 12, md: 6 }}
       aria-label="local weather forecast section"
     >
       <ErrorMessage

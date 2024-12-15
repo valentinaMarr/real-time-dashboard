@@ -14,8 +14,14 @@ export const Clock = () => {
     hours: string;
     minutes: string;
   }>({
-    hours: new Date().getHours().toString(),
-    minutes: new Date().getMinutes().toString(),
+    hours:
+      new Date().getHours() < 10
+        ? `0${new Date().getHours().toString()}`
+        : new Date().getHours().toString(),
+    minutes:
+      new Date().getMinutes() < 10
+        ? `0${new Date().getMinutes().toString()}`
+        : new Date().getMinutes().toString(),
   });
 
   useEffect(() => {
@@ -25,12 +31,8 @@ export const Clock = () => {
       minutes:
         minutesNumber < 10 ? `0${minutesNumber}` : minutesNumber.toString(),
     };
-
-    const timer = setTimeout(
-      () => setTime((prevTime) => ({ ...prevTime, currentTime })),
-      1000
-    );
-  }, [time, setTime]);
+    setTimeout(() => setTime(currentTime), 1000);
+  }, [time]);
 
   if (isMobile) {
     return (
@@ -81,12 +83,13 @@ export const Clock = () => {
       <motion.hr
         style={{
           width: "3vw",
-          borderColor: "inherit",
         }}
         initial={{
+          borderColor: "lightgrey",
           opacity: 0,
         }}
         animate={{
+          borderColor: "darkgrey",
           opacity: 1,
         }}
         transition={{

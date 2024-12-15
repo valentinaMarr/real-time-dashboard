@@ -71,7 +71,7 @@ theme.typography = {
     color: "inherit",
     letterSpacing: "0.5%",
     fontWeight: 500,
-    fontSize: "5rem",
+    fontSize: "4.75rem",
     lineHeight: "5.2rem",
   },
   a: {
@@ -111,43 +111,52 @@ theme.components = {
   MuiPaper: {
     styleOverrides: {
       root: {
+        "&.dawn": {
+          backgroundColor: `${theme.palette.forecastTheme.dawn}56`,
+          color: theme.palette.grey["900"],
+          borderColor: theme.palette.grey["900"],
+        },
+        "&.sunset": {
+          backgroundColor: `${theme.palette.forecastTheme.sunset}56`,
+          color: theme.palette.grey["100"],
+          borderColor: theme.palette.grey["100"],
+        },
+        "&.evening": {
+          backgroundColor: `${theme.palette.forecastTheme.evening}56`,
+          color: theme.palette.grey["100"],
+          borderColor: theme.palette.grey["100"],
+        },
+        "&.sunny": {
+          backgroundColor: `${theme.palette.forecastTheme.sunny}56`,
+          color: theme.palette.grey["900"],
+          borderColor: theme.palette.grey["900"],
+        },
+        "&.rainy": {
+          backgroundColor: `${theme.palette.forecastTheme.rainy}56`,
+          color: theme.palette.grey["100"],
+          borderColor: theme.palette.grey["100"],
+        },
+        "&.snowy": {
+          backgroundColor: `${theme.palette.forecastTheme.snowy}56`,
+          color: theme.palette.grey["900"],
+          borderColor: theme.palette.grey["900"],
+        },
+        "&.none": {
+          backgroundColor: `${theme.palette.grey["A200"]}56`,
+          color: theme.palette.grey["900"],
+          borderColor: theme.palette.grey["900"],
+        },
         variants: [
           {
             props: { variant: "themedPaper" },
             style: {
               borderRadius: 5,
-              border: `1px solid ${theme.palette.grey[200]}`,
+              border: `1px solid`,
               padding: "1.25rem",
               height: "max-content",
-              "&.dawn": {
-                backgroundColor: `${theme.palette.forecastTheme.dawn}56`,
-                color: theme.palette.grey["900"],
-              },
-              "&.sunset": {
-                backgroundColor: `${theme.palette.forecastTheme.sunset}56`,
-                color: theme.palette.grey["100"],
-              },
-              "&.evening": {
-                backgroundColor: `${theme.palette.forecastTheme.evening}56`,
-                color: theme.palette.grey["100"],
-              },
-              "&.sunny": {
-                backgroundColor: `${theme.palette.forecastTheme.sunny}56`,
-                color: theme.palette.grey["900"],
-              },
-              "&.rainy": {
-                backgroundColor: `${theme.palette.forecastTheme.rainy}56`,
-                color: theme.palette.grey["100"],
-              },
-              "&.snowy": {
-                backgroundColor: `${theme.palette.forecastTheme.snowy}56`,
-                color: theme.palette.grey["900"],
-              },
-              "&.none": {
-                backgroundColor: `${theme.palette.grey["A200"]}56`,
+              width: "100%",
+              marginInline: 0,
 
-                color: theme.palette.grey["900"],
-              },
               [theme.breakpoints.down("md")]: {
                 padding: "0.75rem",
               },
@@ -165,6 +174,7 @@ theme.components = {
               paddingBottom: "1rem",
               width: "30vw",
               height: "80vh",
+              backgroundColor: `${theme.palette.grey["A200"]}96`,
               [theme.breakpoints.down("md")]: {
                 width: "50vw",
               },
@@ -182,7 +192,8 @@ theme.components = {
               color: "inherit",
               backgroundColor: "transparent",
               borderRadius: "5px",
-              border: `1px solid ${theme.palette.grey[100]}`,
+              border: "1px solid",
+              borderColor: theme.typography.h1.color,
               height: "30vh",
               width: "15vw",
               padding: "0.75rem",
@@ -200,10 +211,13 @@ theme.components = {
   MuiDivider: {
     styleOverrides: {
       root: {
-        width: "25vw",
+        width: "10vw",
         borderTopWidth: "1px",
         borderTopColor: theme.typography.h1.color,
         marginBlock: "0.5rem",
+        [theme.breakpoints.down("md")]: {
+          width: "25vw",
+        },
       },
     },
   },
@@ -211,6 +225,7 @@ theme.components = {
     styleOverrides: {
       root: {
         borderColor: theme.palette.grey["900"],
+        width: "30vw",
         "& .MuiInputBase-root": {
           animation: "none",
         },

@@ -21,7 +21,9 @@ export const WeatherIcon = ({ forecastIcon }: { forecastIcon: string }) => {
         alt="forecast icon"
         src={`https://openweathermap.org/img/wn/${forecastIcon}@2x.png`}
         fill
-        objectFit="cover"
+        style={{
+          objectFit: "cover",
+        }}
         // sizes="(max-width: 1200px) 50px, 50px"
       />
     </Box>

@@ -57,10 +57,11 @@ export const WelcomeSection = ({
       container
       id="welcome-message-container"
       component="section"
-      size={{ xs: 12, md: 7 }}
+      size={{ xs: 12, md: 6 }}
       sx={{
         display: { md: "grid" },
         gridTemplateColumns: "50% 50%",
+        justifyItems: "stretch",
       }}
     >
       <Grid2

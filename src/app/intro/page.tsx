@@ -1,10 +1,10 @@
 "use client";
 
+import { SlideToTopContainer } from "@/components/animated-containers/SlideToTopContainer";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { motion } from "motion/react";
 import { redirect } from "next/navigation";
 import { ChangeEvent, useCallback, useState } from "react";
 import { MdArrowForwardIos } from "react-icons/md";
@@ -18,11 +18,23 @@ const Intro = () => {
     message?: string;
   }>({ status: false });
 
-  const inputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const inputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setUserName(e.target.value);
-  };
+
+    if (inputError) {
+      setInputError({ status: false });
+    }
+  }, []);
 
   const submit = useCallback(async () => {
+    if (!userName?.length) {
+      setInputError({
+        status: true,
+        message: "Don't want to share your name? Click the skip button",
+      });
+      return;
+    }
+
     const response = await fetch("/api/rememberUser", {
       method: "POST",
       headers: {
@@ -38,13 +50,26 @@ const Intro = () => {
     }
 
     redirect(appUrl as string);
-  }, [userName, setInputError]);
+  }, [userName]);
 
-  const skip = useCallback(() => {
+  const skip = useCallback(async () => {
     setUserName("User");
+    const response = await fetch("/api/rememberUser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userName: "User" }),
+    });
 
-    submit();
-  }, [userName, submit, setUserName]);
+    const requestJson = await response.json();
+    if (response.status !== 200) {
+      setInputError({ status: true, message: requestJson.message });
+      return;
+    }
+
+    redirect(appUrl as string);
+  }, []);
 
   return (
     <Stack
@@ -60,59 +85,18 @@ const Intro = () => {
         textAlign: "center",
       }}
     >
-      <motion.div
-        aria-label="intro-message"
-        initial={{
-          transform: "translateY(2px)",
-          opacity: 0,
-        }}
-        animate={{
-          transform: "translateY(0px)",
-          opacity: 1,
-        }}
-        transition={{
-          duration: 0.5,
-        }}
-      >
+      <SlideToTopContainer aria-label="intro-message" delay={0}>
         <Typography component="h2" variant="h2">
           Hi
         </Typography>
-      </motion.div>
-      <motion.div
-        aria-label="intro-message"
-        initial={{
-          transform: "translateY(2px)",
-          opacity: 0,
-        }}
-        animate={{
-          transform: "translateY(0px)",
-          opacity: 1,
-        }}
-        transition={{
-          duration: 0.5,
-          delay: 1,
-        }}
-      >
+      </SlideToTopContainer>
+      <SlideToTopContainer aria-label="intro-message" delay={1}>
         <Typography component="p" variant="h4">
           How would you like to be called?
         </Typography>
-      </motion.div>
+      </SlideToTopContainer>
 
-      <motion.div
-        aria-label="intro-message"
-        initial={{
-          transform: "translateY(2px)",
-          opacity: 0,
-        }}
-        animate={{
-          transform: "translateY(0px)",
-          opacity: 1,
-        }}
-        transition={{
-          duration: 0.5,
-          delay: 2,
-        }}
-      >
+      <SlideToTopContainer aria-label="intro-message" delay={2}>
         <Stack direction="column" spacing={0.75} sx={{ width: "fit-content" }}>
           <form
             onSubmit={(e) => {
@@ -129,11 +113,11 @@ const Intro = () => {
               placeholder="User"
             />
           </form>
-          <Button variant="text" onClick={skip}>
+          <Button variant="text" onClick={() => skip()}>
             Skip <MdArrowForwardIos />
           </Button>
         </Stack>
-      </motion.div>
+      </SlideToTopContainer>
     </Stack>
   );
 };

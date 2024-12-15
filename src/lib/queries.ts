@@ -11,7 +11,7 @@ export function useGetLocalForecast(lat: number, lon: number) {
   return useQueries({
     queries: [
       {
-        queryKey: ["getWeatherForecast"],
+        queryKey: ["getWeatherForecast", lat, lon],
         queryFn: async () => {
           const response = await fetch(weatherUrl);
           const data = await response.json();
@@ -31,7 +31,7 @@ export function useGetLocalForecast(lat: number, lon: number) {
         retry: 2,
       },
       {
-        queryKey: ["getLocalInfo"],
+        queryKey: ["getLocalInfo", lat, lon],
         queryFn: async () => {
           const response = await fetch(geolocationUrl);
           const data = await response.json();
