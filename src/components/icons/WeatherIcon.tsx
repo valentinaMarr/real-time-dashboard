@@ -24,7 +24,7 @@ export const WeatherIcon = ({ forecastIcon }: { forecastIcon: string }) => {
         style={{
           objectFit: "cover",
         }}
-        // sizes="(max-width: 1200px) 50px, 50px"
+        sizes="(max-width: 1200px) 50px, 50px"
       />
     </Box>
   );

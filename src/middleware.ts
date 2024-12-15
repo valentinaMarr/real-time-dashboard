@@ -4,9 +4,14 @@ import { NextResponse } from "next/server";
 export function middleware(request: NextRequest) {
   const hasName = request.cookies.get("userName");
   const origin = request.nextUrl.origin;
+  const pathname = request.nextUrl.pathname;
 
-  if (!hasName) {
+  if (!hasName && pathname !== "/intro") {
     return NextResponse.redirect(`${origin}/intro`);
+  }
+
+  if (hasName && pathname == "/intro") {
+    return NextResponse.redirect(`${origin}/`);
   }
 
   return NextResponse.next();
@@ -14,6 +19,6 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|intro).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
   ],
 };
