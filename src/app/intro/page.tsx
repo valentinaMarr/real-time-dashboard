@@ -18,13 +18,16 @@ const Intro = () => {
     message?: string;
   }>({ status: false });
 
-  const inputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    setUserName(e.target.value);
+  const inputChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      setUserName(e.target.value);
 
-    if (inputError) {
-      setInputError({ status: false });
-    }
-  }, []);
+      if (inputError) {
+        setInputError({ status: false });
+      }
+    },
+    [inputError]
+  );
 
   const submit = useCallback(async () => {
     if (!userName?.length) {

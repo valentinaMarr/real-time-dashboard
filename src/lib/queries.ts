@@ -8,6 +8,7 @@ const news_key = process.env.NEXT_PUBLIC_NEWSAPIKEY;
 export function useGetLocalForecast(lat: number, lon: number) {
   const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=en&appid=${weather_key}`;
   const geolocationUrl = `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${weather_key}`;
+
   return useQueries({
     queries: [
       {
@@ -28,7 +29,7 @@ export function useGetLocalForecast(lat: number, lon: number) {
         refetchOnWindowFocus: false,
         refetchOnReconnect: false,
         refetchInterval: 60 * 60 * 24,
-        retry: 2,
+        retry: 0,
       },
       {
         queryKey: ["getLocalInfo", lat, lon],
@@ -48,11 +49,11 @@ export function useGetLocalForecast(lat: number, lon: number) {
         refetchOnWindowFocus: false,
         refetchOnReconnect: false,
         refetchInterval: 60 * 60 * 24,
-        retry: 2,
+        retry: 0,
       },
     ],
     combine: (results) => {
-      const error = results.filter((item: any) => item instanceof Error);
+      const error = results.filter((item: unknown) => item instanceof Error);
 
       return {
         data: results.map((result) => result.data),

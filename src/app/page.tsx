@@ -14,7 +14,7 @@ import {
 } from "@/lib/queries";
 import { Forecast, ForecastDetails, NewsDetails } from "@/lib/types";
 import Grid2 from "@mui/material/Grid2";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export default function Home() {
   // GET COORDINATES
@@ -58,14 +58,14 @@ export default function Home() {
     }
   };
 
-  const getLocation = useCallback(() => {
+  const getLocation = () => {
     const currentLocation = navigator.geolocation.getCurrentPosition(
       writeLocation,
       writeError
     );
 
     return currentLocation;
-  }, [writeError, writeLocation]);
+  };
 
   useEffect(() => {
     getLocation();
@@ -149,11 +149,11 @@ export default function Home() {
     const { sunriseTime, sunsetTime } = timeKeys;
     const now = new Date().getTime();
 
-    if (now == sunriseTime) {
+    if (now === sunriseTime) {
       return "dawn";
     }
 
-    if (now == sunsetTime) {
+    if (now === sunsetTime) {
       return "sunset";
     }
 

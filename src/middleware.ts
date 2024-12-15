@@ -10,7 +10,7 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(`${origin}/intro`);
   }
 
-  if (hasName && pathname == "/intro") {
+  if (hasName && pathname === "/intro") {
     return NextResponse.redirect(`${origin}/`);
   }
 
