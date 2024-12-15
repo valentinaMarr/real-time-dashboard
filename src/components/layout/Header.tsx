@@ -3,7 +3,13 @@ import { Box } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import { WelcomeIcon } from "../icons/WelcomeIcon";
 
-export const Header = () => {
+export const Header = ({
+  sunrise,
+  sunset,
+}: {
+  sunrise: number;
+  sunset: number;
+}) => {
   const [isInView, setIsInView] = useState<boolean>(true);
   const checkItemInView = useCallback(() => {
     if (typeof window === "undefined") {
@@ -32,8 +38,16 @@ export const Header = () => {
   }, []);
 
   return (
-    <Box component="header" sx={{ position: "fixed", top: { xs: 8, md: 16 } }}>
-      {!isInView && <WelcomeIcon />}
+    <Box
+      component="header"
+      sx={{
+        position: "fixed",
+        top: { xs: "0.25rem", md: "1rem" },
+        left: { xs: "0.25rem", md: "1rem" },
+        zIndex: 10,
+      }}
+    >
+      {!isInView && <WelcomeIcon sunrise={sunrise} sunset={sunset} />}
     </Box>
   );
 };

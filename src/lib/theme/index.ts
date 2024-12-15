@@ -11,6 +11,8 @@ theme.typography = {
     color: "inherit",
     letterSpacing: 0,
     fontWeight: 400,
+    fontSize: "2.25rem",
+    lineHeight: "2.81rem",
     [theme.breakpoints.down("md")]: {
       fontSize: "1.5rem",
       lineHeight: "2.06rem",
@@ -21,9 +23,11 @@ theme.typography = {
     color: "inherit",
     letterSpacing: "1%",
     fontWeight: 500,
+    fontSize: "2.75rem",
+    lineHeight: "2.81rem",
     [theme.breakpoints.down("md")]: {
       fontSize: "1.875rem",
-      lineHeight: "2.31rem",
+      lineHeight: "2.435rem",
     },
   },
   h3: {
@@ -31,9 +35,11 @@ theme.typography = {
     color: "inherit",
     letterSpacing: 0,
     fontWeight: 400,
+    fontSize: "1rem",
+    lineHeight: "1.125rem",
     [theme.breakpoints.down("md")]: {
       fontSize: "1.125rem",
-      lineHeight: "1.25rem",
+      lineHeight: "1.685rem",
     },
   },
   h4: {
@@ -41,30 +47,32 @@ theme.typography = {
     color: "inherit",
     letterSpacing: "1%",
     fontWeight: 400,
-    [theme.breakpoints.down("md")]: {
-      fontSize: "1.25rem",
-      lineHeight: "1.5rem",
-    },
+    fontSize: "1.25rem",
+    lineHeight: "1.81rem",
   },
   body1: {
     fontFamily: "var(--font-montserrat)",
     letterSpacing: "1%",
     color: "inherit",
     fontWeight: 400,
-    [theme.breakpoints.down("md")]: {
-      fontSize: "0.875rem",
-      lineHeight: "1.06rem",
-    },
+    fontSize: "0.875rem",
+    lineHeight: "1.435rem",
   },
   errorMessage: {
     fontFamily: "var(--font-montserrat)",
     color: "inherit",
     letterSpacing: "0.5%",
     fontWeight: 600,
-    [theme.breakpoints.down("md")]: {
-      fontSize: "1.125rem",
-      lineHeight: "1.5rem",
-    },
+    fontSize: "1.125rem",
+    lineHeight: "1.685rem",
+  },
+  clock: {
+    fontFamily: "var(--font-montserrat)",
+    color: "inherit",
+    letterSpacing: "0.5%",
+    fontWeight: 500,
+    fontSize: "5rem",
+    lineHeight: "5.2rem",
   },
   a: {
     textTransform: "uppercase",
@@ -72,10 +80,8 @@ theme.typography = {
     color: "inherit",
     letterSpacing: "1%",
     fontWeight: 500,
-    [theme.breakpoints.down("md")]: {
-      fontSize: "0.875rem",
-      lineHeight: "1.06rem",
-    },
+    fontSize: "0.875rem",
+    lineHeight: "1.06rem",
   },
 };
 
@@ -97,9 +103,8 @@ theme.components = {
     styleOverrides: {
       root: {
         width: "100%",
-        [theme.breakpoints.down("md")]: {
-          paddingInline: "1rem",
-        },
+        overflow: "hidden",
+        flexWrap: "wrap",
       },
     },
   },
@@ -111,33 +116,36 @@ theme.components = {
             props: { variant: "themedPaper" },
             style: {
               borderRadius: 5,
+              border: `1px solid ${theme.palette.grey[200]}`,
+              padding: "1.25rem",
+              height: "max-content",
               "&.dawn": {
-                backgroundColor: theme.palette.forecastTheme.dawn,
-                color: theme.palette.grey["100"],
+                backgroundColor: `${theme.palette.forecastTheme.dawn}56`,
+                color: theme.palette.grey["900"],
               },
               "&.sunset": {
-                backgroundColor: theme.palette.forecastTheme.sunset,
+                backgroundColor: `${theme.palette.forecastTheme.sunset}56`,
                 color: theme.palette.grey["100"],
               },
               "&.evening": {
-                backgroundColor: theme.palette.forecastTheme.evening,
+                backgroundColor: `${theme.palette.forecastTheme.evening}56`,
                 color: theme.palette.grey["100"],
               },
               "&.sunny": {
-                backgroundColor: theme.palette.forecastTheme.sunny,
+                backgroundColor: `${theme.palette.forecastTheme.sunny}56`,
                 color: theme.palette.grey["900"],
               },
               "&.rainy": {
-                backgroundColor: theme.palette.forecastTheme.rainy,
+                backgroundColor: `${theme.palette.forecastTheme.rainy}56`,
                 color: theme.palette.grey["100"],
               },
               "&.snowy": {
-                backgroundColor: theme.palette.forecastTheme.snowy,
+                backgroundColor: `${theme.palette.forecastTheme.snowy}56`,
                 color: theme.palette.grey["900"],
               },
               "&.none": {
-                backgroundColor: "#eaeaea56",
-                border: `1px solid ${theme.palette.grey[200]}`,
+                backgroundColor: `${theme.palette.grey["A200"]}56`,
+
                 color: theme.palette.grey["900"],
               },
               [theme.breakpoints.down("md")]: {
@@ -148,18 +156,41 @@ theme.components = {
           {
             props: { variant: "discreet" },
             style: {
+              display: "grid",
+              gridTemplateRows: "40% 40% 10%",
+              rowGap: "1.75rem",
+              borderRadius: 5,
+              paddingInline: "1.25rem",
+              paddingTop: "0.93rem",
+              paddingBottom: "1rem",
+              width: "30vw",
+              height: "80vh",
+              [theme.breakpoints.down("md")]: {
+                width: "50vw",
+              },
+              [theme.breakpoints.down("sm")]: {
+                width: "auto",
+                display: "flex",
+                flexDirection: "column",
+                rowGap: "0.875rem",
+              },
+            },
+          },
+          {
+            props: { variant: "clock" },
+            style: {
+              color: "inherit",
+              backgroundColor: "transparent",
+              borderRadius: "5px",
+              border: `1px solid ${theme.palette.grey[100]}`,
+              height: "30vh",
+              width: "15vw",
+              padding: "0.75rem",
+              alignSelf: "center",
               display: "flex",
               flexDirection: "column",
-              rowGap: "0.875rem",
-              alignItems: "stretch",
-              justifyContent: "left",
-              borderRadius: 5,
-              [theme.breakpoints.down("md")]: {
-                paddingInline: "1.25rem",
-                paddingTop: "0.93rem",
-                paddingBottom: "1rem",
-                height: "30rem",
-              },
+              justifyContent: "center",
+              alignItems: "center",
             },
           },
         ],
@@ -169,9 +200,10 @@ theme.components = {
   MuiDivider: {
     styleOverrides: {
       root: {
-        width: "5.25rem",
+        width: "25vw",
         borderTopWidth: "1px",
         borderTopColor: theme.typography.h1.color,
+        marginBlock: "0.5rem",
       },
     },
   },

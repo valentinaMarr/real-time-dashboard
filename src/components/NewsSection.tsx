@@ -14,11 +14,7 @@ export const NewsSection = ({
 }) => {
   if (error) {
     return (
-      <Grid2
-        component="section"
-        size={{ xs: 12, md: 6 }}
-        aria-label="country news section"
-      >
+      <Grid2 component="section" size={12} aria-label="country news section">
         <ErrorMessage
           body={(error as Error).message}
           headline={
@@ -32,9 +28,9 @@ export const NewsSection = ({
   return (
     <Grid2
       container
-      size={{ xs: 12, md: 6 }}
+      size={12}
       component="section"
-      spacing={{ xs: 1.75 }}
+      spacing={{ xs: 1.75, md: 3 }}
       aria-labelledby="section-title"
     >
       <Grid2
@@ -50,11 +46,13 @@ export const NewsSection = ({
         <Divider />
       </Grid2>
       <Grid2
-        size={{ xs: 12, md: 3 }}
+        size={12}
         sx={{
+          gap: "1.375rem",
+          justifyContent: "space-evenly",
+          alignItems: "center",
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
-          rowGap: "1.375rem",
         }}
       >
         {articles?.map((item: NewsDetails, index) => (

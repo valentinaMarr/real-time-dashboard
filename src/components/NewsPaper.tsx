@@ -21,13 +21,14 @@ export const NewsPaper = ({
             position: "relative",
             width: "100%",
             height: {
-              xs: "15rem",
+              xs: "30vh",
             },
           }}
         >
           <Image
             alt="news-cover-image"
             fill
+            sizes="(max-width: 1200px) 300px, 240px"
             src={imgSrc}
             style={{
               objectFit: "cover",
@@ -41,10 +42,12 @@ export const NewsPaper = ({
         component="article"
         spacing={1}
         sx={{
+          overflow: "clip",
+          textWrap: "pretty",
           textOverflow: "ellipsis",
           wordBreak: "break-word",
           height: "fit-content",
-          maxHeight: { xs: "30rem" },
+          maxHeight: "30vh",
         }}
       >
         <Typography component="h4" variant="body1">

@@ -6,9 +6,13 @@ export const WeatherIcon = ({ forecastIcon }: { forecastIcon: string }) => {
     <Box
       aria-hidden="true"
       sx={{
-        width: "3.12rem",
-        height: "3.12rem",
-        justifySelf: "center",
+        width: "5vw",
+        height: "5vh",
+        justifySelf: { xs: "center", md: "end" },
+        alignSelf: { xs: "center", md: "start" },
+        transform: {
+          lg: "translateY(-12px)",
+        },
         backgroundColor: "transparent",
         position: "relative",
       }}
@@ -17,6 +21,8 @@ export const WeatherIcon = ({ forecastIcon }: { forecastIcon: string }) => {
         alt="forecast icon"
         src={`https://openweathermap.org/img/wn/${forecastIcon}@2x.png`}
         fill
+        objectFit="cover"
+        // sizes="(max-width: 1200px) 50px, 50px"
       />
     </Box>
   );

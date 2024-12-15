@@ -1,6 +1,5 @@
 "use client";
 import { ForecastDetails } from "@/lib/types";
-import { useMediaQuery } from "@mui/material";
 import Grid2 from "@mui/material/Grid2";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
@@ -17,7 +16,6 @@ export const WeatherSection = ({
   themeKey: string;
   error?: unknown;
 }) => {
-  const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
   const { city, state, temperature, description, icon } = forecastDetails;
   const detailsListInfo = {
     max_temperature: forecastDetails?.max_temperature,
@@ -26,11 +24,13 @@ export const WeatherSection = ({
     humidity: forecastDetails?.humidity,
   };
 
+  const iterableList = Object.entries(detailsListInfo);
+
   if (error) {
     <Grid2
       container
       component="section"
-      size={{ xs: 12, md: 6 }}
+      size={{ xs: 12, md: 4 }}
       aria-label="local weather forecast section"
     >
       <ErrorMessage
@@ -43,34 +43,38 @@ export const WeatherSection = ({
   return (
     <Grid2
       component="section"
-      size={{ xs: 12, md: 6 }}
+      size={{ xs: 12, md: 4 }}
       aria-label="local weather forecast section"
     >
       <Paper elevation={1} variant="themedPaper" className={themeKey}>
         <Grid2
           container
-          size={{ xs: 12, md: 6 }}
+          size={12}
+          columns={12}
+          maxWidth="100%"
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            textAlign: "center",
-            rowGap: { xs: 1.75 },
+            textAlign: { xs: "center", md: "left" },
+            rowGap: { xs: 1.75, md: 0.5 },
           }}
         >
-          <Grid2 size={{ xs: 12, md: 6 }} aria-labelledby="location">
+          <Grid2
+            size={12}
+            aria-labelledby="location"
+            sx={{
+              display: "flex",
+              flexDirection: { xs: "column", md: "row" },
+              position: "relative",
+            }}
+          >
             <Typography id="location" component="p" variant="body1">
               {`${city}, ${state}`}
             </Typography>
+            {!!icon && <WeatherIcon forecastIcon={icon} />}
           </Grid2>
-          {isMobile && (
-            <Grid2 size={12} aria-hidden="true">
-              {!!icon && <WeatherIcon forecastIcon={icon} />}
-            </Grid2>
-          )}
           <Grid2
-            size={{ xs: 12, md: 6 }}
-            offset={{ md: 6 }}
             aria-label="weather forecast"
+            size={{ xs: 12, md: 4 }}
+            sx={{ alignContent: { md: "center" } }}
           >
             <Typography component="h2" variant="h2">
               {temperature}
@@ -80,18 +84,20 @@ export const WeatherSection = ({
             </Typography>
           </Grid2>
           <Grid2
-            size={{ xs: 12, md: 6 }}
+            size={{ xs: 12, md: 8 }}
             aria-label="weather forecast"
+            columns={{ xs: 3, md: 1 }}
             sx={{
-              paddingTop: 4,
+              paddingTop: { xs: 4, md: 0 },
               gap: { xs: 2 },
-              columns: { xs: 3 },
               display: "flex",
+              flexDirection: { xs: "row", md: "column" },
               justifyContent: "space-between",
+              alignContent: "baseline",
               flexWrap: "wrap",
             }}
           >
-            {Object.entries(detailsListInfo).map((item, index) => {
+            {iterableList.map((item, index) => {
               if (item[0] === "temperature" || item[0] === "description") {
                 return null;
               }
@@ -101,9 +107,12 @@ export const WeatherSection = ({
               return (
                 <Stack
                   sx={{
-                    maxWidth: {
-                      xs: "33%",
+                    width: {
+                      xs: index < iterableList.length - 1 ? "25%" : "100%",
+                      md: "100%",
                     },
+                    justifyContent: { md: "space-between" },
+                    borderBottom: { xs: "none", md: "1px solid" },
                   }}
                   direction={{ xs: "column", md: "row" }}
                   key={`weather-details-grid-cell-${index}`}

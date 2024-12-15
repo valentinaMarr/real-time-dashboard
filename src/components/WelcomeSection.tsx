@@ -14,9 +14,13 @@ import { WelcomeIcon } from "./icons/WelcomeIcon";
 export const WelcomeSection = ({
   userName,
   error,
+  sunset,
+  sunrise,
 }: {
   userName: string;
   error?: unknown;
+  sunrise: number;
+  sunset: number;
 }) => {
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
   const date = new Date();
@@ -28,12 +32,12 @@ export const WelcomeSection = ({
   const welcomeMessage = useMemo(() => {
     const hours = date.getHours();
 
-    if (hours > 3 && hours < 18) {
+    if (hours > sunrise && hours < sunset) {
       return "Good morning, ";
     }
 
     return "Good evening, ";
-  }, [userName]);
+  }, [userName, sunrise, sunset]);
 
   if (error) {
     return (
@@ -49,18 +53,27 @@ export const WelcomeSection = ({
   }
 
   return (
-    <Grid2 container id="welcome-message-container" component="section">
+    <Grid2
+      container
+      id="welcome-message-container"
+      component="section"
+      size={{ xs: 12, md: 7 }}
+      sx={{
+        display: { md: "grid" },
+        gridTemplateColumns: "50% 50%",
+      }}
+    >
       <Grid2
         sx={{
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
-          textAlign: "center",
-          rowGap: { xs: 1.75 },
+          alignItems: { xs: "center", md: "start" },
+          textAlign: { xs: "center", md: "left" },
+          rowGap: { xs: 1.75, md: 3 },
         }}
-        size={{ xs: 12, md: 6 }}
+        size={{ xs: 12, md: 9 }}
       >
-        {isMobile && <WelcomeIcon />}
+        {isMobile && <WelcomeIcon sunrise={sunrise} sunset={sunset} />}
         <motion.span
           aria-label="intro-message"
           initial={{
@@ -81,16 +94,21 @@ export const WelcomeSection = ({
         </motion.span>
         <Divider />
         <Stack direction="column" alignItems="center" spacing={1}>
-          <Typography> {longDate} </Typography>
+          <Typography component="h4" variant="h4">
+            {" "}
+            {longDate}{" "}
+          </Typography>
           {isMobile && <Clock />}
         </Stack>
       </Grid2>
       {!isMobile && (
         <Grid2
-          size={6}
-          display="flex"
-          justifyItems="center"
-          alignItems="center"
+          size={3}
+          sx={{
+            display: "flex",
+            justifyItems: "center",
+            alignItems: "start",
+          }}
         >
           <Clock />
         </Grid2>

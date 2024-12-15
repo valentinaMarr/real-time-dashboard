@@ -129,12 +129,23 @@ export default function Home() {
   }, [newsData]);
 
   // THEMING
-  const weatherKey: Forecast | string = useMemo(() => {
-    const forecastDescription = locationDetails.description;
+  const timeKeys: {
+    sunriseTime: unknown;
+    sunsetTime: unknown;
+  } = useMemo(() => {
     const sunsetTime = geolocationData?.[0]?.sys.sunset;
     const sunriseTime = geolocationData?.[0]?.sys.sunrise;
 
-    const now = new Date().getUTCHours();
+    return {
+      sunriseTime,
+      sunsetTime,
+    };
+  }, [locationDetails, geolocationData]);
+
+  const weatherKey: Forecast | string = useMemo(() => {
+    const forecastDescription = locationDetails.description;
+    const { sunriseTime, sunsetTime } = timeKeys;
+    const now = new Date().getTime();
 
     if (now == sunriseTime) {
       return "dawn";
@@ -144,7 +155,7 @@ export default function Home() {
       return "sunset";
     }
 
-    if (now > sunsetTime) {
+    if (now > (sunsetTime as number)) {
       return "evening";
     }
 
@@ -158,7 +169,7 @@ export default function Home() {
       default:
         return "none";
     }
-  }, [locationDetails, geolocationData]);
+  }, [locationDetails, geolocationData, timeKeys]);
 
   if (userNameLoading || forecastPending || reportsLoading) {
     return <Loading />;
@@ -166,21 +177,30 @@ export default function Home() {
 
   return (
     <>
-      <Header />
+      <Header
+        sunrise={timeKeys.sunriseTime as number}
+        sunset={timeKeys.sunsetTime as number}
+      />
       <Grid2
         className={`body-${weatherKey}`}
         component="main"
         container
         maxWidth="100vw"
-        minHeight="100vh"
-        spacing={{ xs: 12 }}
+        size={{ xs: 12 }}
+        spacing={{ xs: 12, md: 12 }}
         sx={{
+          paddingInline: { xs: "1.5rem", md: "2rem" },
           paddingBlock: {
             xs: "6.75rem",
           },
         }}
       >
-        <WelcomeSection userName={userName} error={userNameError} />
+        <WelcomeSection
+          userName={userName}
+          error={userNameError}
+          sunrise={timeKeys.sunriseTime as number}
+          sunset={timeKeys.sunsetTime as number}
+        />
         <WeatherSection
           forecastDetails={locationDetails}
           themeKey={weatherKey}

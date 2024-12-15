@@ -15,11 +15,13 @@ declare module "@mui/material/styles" {
   interface TypographyVariants {
     errorMessage: React.CSSProperties;
     a: React.CSSProperties;
+    clock: React.CSSProperties;
   }
 
   interface TypographyVariantsOptions {
     errorMessage?: React.CSSProperties;
     a?: React.CSSProperties;
+    clock?: React.CSSProperties;
   }
 }
 
@@ -51,6 +53,7 @@ declare module "@mui/material/Typography" {
   interface TypographyPropsVariantOverrides {
     errorMessage: true;
     a: true;
+    clock: true;
   }
 }
 
@@ -60,5 +63,6 @@ declare module "@mui/material/Paper" {
   interface PaperPropsVariantOverrides {
     themedPaper: true;
     discreet: true;
+    clock: true;
   }
 }

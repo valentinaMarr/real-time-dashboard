@@ -1,6 +1,8 @@
 "use client";
 
-import { Stack, useMediaQuery } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
+import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
@@ -8,7 +10,10 @@ import { useEffect, useState } from "react";
 export const Clock = () => {
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
 
-  const [time, setTime] = useState<{ hours: string; minutes: string }>({
+  const [time, setTime] = useState<{
+    hours: string;
+    minutes: string;
+  }>({
     hours: new Date().getHours().toString(),
     minutes: new Date().getMinutes().toString(),
   });
@@ -21,8 +26,11 @@ export const Clock = () => {
         minutesNumber < 10 ? `0${minutesNumber}` : minutesNumber.toString(),
     };
 
-    const timer = setTimeout(() => setTime(currentTime), 1000);
-  }, [setTime]);
+    const timer = setTimeout(
+      () => setTime((prevTime) => ({ ...prevTime, currentTime })),
+      1000
+    );
+  }, [time, setTime]);
 
   if (isMobile) {
     return (
@@ -36,7 +44,9 @@ export const Clock = () => {
           width: "fit-content",
         }}
       >
-        <Typography variant="h4">{time.hours}</Typography>
+        <Typography component="p" variant="h4">
+          {time.hours}
+        </Typography>
         <motion.h4
           initial={{
             opacity: 0,
@@ -51,10 +61,42 @@ export const Clock = () => {
         >
           :
         </motion.h4>
-        <Typography variant="h4">{time.minutes}</Typography>
+        <Typography component="p" variant="h4">
+          {time.minutes}
+        </Typography>
       </Stack>
     );
   }
 
-  return <></>;
+  return (
+    <Paper
+      variant="clock"
+      component="div"
+      aria-label={`analog clock showing ${time.hours}:${time.minutes}`}
+      elevation={1}
+    >
+      <Typography component="p" variant="clock">
+        {time.hours}
+      </Typography>
+      <motion.hr
+        style={{
+          width: "3vw",
+          borderColor: "inherit",
+        }}
+        initial={{
+          opacity: 0,
+        }}
+        animate={{
+          opacity: 1,
+        }}
+        transition={{
+          duration: 1.2,
+          repeat: Infinity,
+        }}
+      />
+      <Typography component="p" variant="clock">
+        {time.minutes}
+      </Typography>
+    </Paper>
+  );
 };
