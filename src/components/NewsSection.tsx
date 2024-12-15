@@ -49,8 +49,8 @@ export const NewsSection = ({
         size={12}
         sx={{
           gap: "1.375rem",
-          justifyContent: "space-evenly",
-          alignItems: "center",
+          justifyContent: { xs: "space-evenly", md: "start" },
+          alignItems: { xs: "center", md: "stretch" },
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
         }}
