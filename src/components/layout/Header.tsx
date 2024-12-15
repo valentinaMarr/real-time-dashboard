@@ -35,7 +35,7 @@ export const Header = ({
 
   useEffect(() => {
     checkItemInView();
-  }, []);
+  }, [checkItemInView]);
 
   return (
     <Box

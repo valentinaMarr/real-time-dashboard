@@ -23,13 +23,13 @@ export const WelcomeSection = ({
   sunset: number;
 }) => {
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
-  const date = new Date();
   const longDate = Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
-  }).format(date);
+  }).format(new Date());
   const welcomeMessage = useMemo(() => {
+    const date = new Date();
     const hours = date.getHours();
 
     if (hours > sunrise && hours < sunset) {
@@ -37,7 +37,7 @@ export const WelcomeSection = ({
     }
 
     return "Good evening, ";
-  }, [userName, sunrise, sunset]);
+  }, [sunrise, sunset]);
 
   if (error) {
     return (

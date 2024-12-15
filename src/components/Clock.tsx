@@ -25,11 +25,15 @@ export const Clock = () => {
   });
 
   useEffect(() => {
-    const minutesNumber = new Date().getMinutes();
     const currentTime: { hours: string; minutes: string } = {
-      hours: new Date().getHours().toString(),
+      hours:
+        new Date().getHours() < 10
+          ? `0${new Date().getHours().toString()}`
+          : new Date().getHours().toString(),
       minutes:
-        minutesNumber < 10 ? `0${minutesNumber}` : minutesNumber.toString(),
+        new Date().getMinutes() < 10
+          ? `0${new Date().getMinutes().toString()}`
+          : new Date().getMinutes().toString(),
     };
     setTimeout(() => setTime(currentTime), 1000);
   }, [time]);

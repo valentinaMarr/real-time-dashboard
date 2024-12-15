@@ -142,7 +142,7 @@ export default function Home() {
       sunriseTime,
       sunsetTime,
     };
-  }, [locationDetails, geolocationData]);
+  }, [geolocationData]);
 
   const weatherKey: Forecast | string = useMemo(() => {
     const forecastDescription = locationDetails.description;
@@ -171,7 +171,7 @@ export default function Home() {
       default:
         return "none";
     }
-  }, [locationDetails, geolocationData, timeKeys]);
+  }, [locationDetails, timeKeys]);
 
   if (userNameLoading || forecastPending || reportsLoading) {
     return <Loading />;
