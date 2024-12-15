@@ -1,4 +1,10 @@
-export type Forecast = "sunny" | "rainy" | "snowy";
+export type Forecast =
+  | "sunny"
+  | "rainy"
+  | "snowy"
+  | "dawn"
+  | "sunset"
+  | "evening";
 export type ForecastDetails = {
   city: string;
   state: string;

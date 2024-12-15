@@ -12,6 +12,10 @@ export const Header = () => {
 
     const item = document.getElementById("welcome-message-container");
 
+    if (!item) {
+      return;
+    }
+
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].intersectionRatio > 0) {
         setIsInView(true);
@@ -25,7 +29,8 @@ export const Header = () => {
 
   useEffect(() => {
     checkItemInView();
-  }, [checkItemInView]);
+  }, []);
+
   return (
     <Box component="header" sx={{ position: "fixed", top: { xs: 8, md: 16 } }}>
       {!isInView && <WelcomeIcon />}

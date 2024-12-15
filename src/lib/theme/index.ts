@@ -4,9 +4,6 @@ import { createTheme } from "@mui/material";
 
 const theme = createTheme();
 
-// TODO: ADD TYPOGRAPHY VARIANT FOR ERROR
-// TODO: ADD PAPER VARIANT FOR NEWS
-
 theme.typography = {
   ...theme.typography,
   h1: {
@@ -138,6 +135,11 @@ theme.components = {
                 backgroundColor: theme.palette.forecastTheme.snowy,
                 color: theme.palette.grey["900"],
               },
+              "&.none": {
+                backgroundColor: "#eaeaea56",
+                border: `1px solid ${theme.palette.grey[200]}`,
+                color: theme.palette.grey["900"],
+              },
               [theme.breakpoints.down("md")]: {
                 padding: "0.75rem",
               },
@@ -198,6 +200,7 @@ theme.components = {
               fontWeight: 600,
               textTransform: "uppercase",
               alignSelf: "end",
+              justifySelf: "end",
               color: "inherit",
               [theme.breakpoints.down("md")]: {
                 fontSize: "0.875rem",

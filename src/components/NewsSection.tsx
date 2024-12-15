@@ -2,9 +2,33 @@ import { NewsDetails } from "@/lib/types";
 import Divider from "@mui/material/Divider";
 import Grid2 from "@mui/material/Grid2";
 import Typography from "@mui/material/Typography";
+import { ErrorMessage } from "./ErrorMessage";
 import { NewsPaper } from "./NewsPaper";
 
-export const NewsSection = ({ articles }: { articles: Array<NewsDetails> }) => {
+export const NewsSection = ({
+  articles,
+  error,
+}: {
+  articles: Array<NewsDetails>;
+  error?: unknown;
+}) => {
+  if (error) {
+    return (
+      <Grid2
+        component="section"
+        size={{ xs: 12, md: 6 }}
+        aria-label="country news section"
+      >
+        <ErrorMessage
+          body={(error as Error).message}
+          headline={
+            ((error as Error)?.cause as string) || "An error has occurred"
+          }
+        />
+      </Grid2>
+    );
+  }
+
   return (
     <Grid2
       container

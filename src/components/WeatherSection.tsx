@@ -11,9 +11,11 @@ import { WeatherIcon } from "./icons/WeatherIcon";
 export const WeatherSection = ({
   forecastDetails,
   themeKey,
+  error,
 }: {
   forecastDetails: ForecastDetails;
   themeKey: string;
+  error?: unknown;
 }) => {
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
   const { city, state, temperature, description, icon } = forecastDetails;
@@ -24,7 +26,7 @@ export const WeatherSection = ({
     humidity: forecastDetails?.humidity,
   };
 
-  if (!city?.length || !temperature?.length) {
+  if (error) {
     <Grid2
       container
       component="section"

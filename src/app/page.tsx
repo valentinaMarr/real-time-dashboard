@@ -1,6 +1,7 @@
 "use client";
 
 import { Header } from "@/components/layout/Header";
+import { Loading } from "@/components/Loading";
 import { NewsSection } from "@/components/NewsSection";
 import { WeatherSection } from "@/components/WeatherSection";
 import { WelcomeSection } from "@/components/WelcomeSection";
@@ -11,8 +12,6 @@ import {
 } from "@/lib/queries";
 import { Forecast, ForecastDetails, NewsDetails } from "@/lib/types";
 import Grid2 from "@mui/material/Grid2";
-import Skeleton from "@mui/material/Skeleton";
-import { useIsFetching } from "@tanstack/react-query";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 export default function Home() {
@@ -71,8 +70,22 @@ export default function Home() {
   }, [getLocation]);
 
   // QUERIES
-  const { data: geolocationData } = useGetLocalForecast(latitude, longitude);
-  const { data: newsData } = useGetNewsReports();
+  const {
+    data: geolocationData,
+    pending: forecastPending,
+    error: geolocationError,
+  } = useGetLocalForecast(latitude, longitude);
+  const {
+    data: newsData,
+    isLoading: reportsLoading,
+    error: reportsError,
+  } = useGetNewsReports();
+
+  const {
+    data: userName,
+    isLoading: userNameLoading,
+    error: userNameError,
+  } = useGetUserName();
 
   const locationDetails: ForecastDetails = useMemo(() => {
     const geolocationResults = geolocationData?.[1]?.[0];
@@ -94,6 +107,10 @@ export default function Home() {
   const newsDetails: Array<NewsDetails> = useMemo(() => {
     const relevantData = newsData?.articles;
 
+    if (!relevantData?.length) {
+      return [];
+    }
+
     const articles: Array<NewsDetails> = relevantData?.map((item: any) => ({
       headline: item?.title,
       imgSrc: item?.urlToImage,
@@ -102,43 +119,56 @@ export default function Home() {
       source: item?.source?.id,
     }));
 
-    return articles || [];
+    const filteredList = articles.filter(
+      (item: any, index: number) =>
+        articles.findIndex((article) => article.headline === item.headline) ===
+        index
+    );
+
+    return filteredList;
   }, [newsData]);
 
-  const { data: userName } = useGetUserName();
-
-  const queriesAreFetching = useIsFetching({
-    queryKey: [
-      "username",
-      "getNewsReports",
-      "getWeatherForecast",
-      "getLocalInfo",
-    ],
-  });
-
   // THEMING
-  const weatherKey: Forecast = useMemo(() => {
+  const weatherKey: Forecast | string = useMemo(() => {
     const forecastDescription = locationDetails.description;
+    const sunsetTime = geolocationData?.[0]?.sys.sunset;
+    const sunriseTime = geolocationData?.[0]?.sys.sunrise;
+
+    const now = new Date().getUTCHours();
+
+    if (now == sunriseTime) {
+      return "dawn";
+    }
+
+    if (now == sunsetTime) {
+      return "sunset";
+    }
+
+    if (now > sunsetTime) {
+      return "evening";
+    }
 
     switch (forecastDescription) {
       case "clear sky":
         return "sunny";
       case "snow":
         return "snowy";
-      default:
+      case "rain":
         return "rainy";
+      default:
+        return "none";
     }
-  }, [locationDetails]);
+  }, [locationDetails, geolocationData]);
 
-  useEffect(() => {
-    const body = document.getElementsByTagName("body");
-    body[0].classList.add(`body-${weatherKey}`);
-  }, [weatherKey]);
+  if (userNameLoading || forecastPending || reportsLoading) {
+    return <Loading />;
+  }
 
   return (
     <>
       <Header />
       <Grid2
+        className={`body-${weatherKey}`}
         component="main"
         container
         maxWidth="100vw"
@@ -150,38 +180,14 @@ export default function Home() {
           },
         }}
       >
-        {queriesAreFetching > 0 ? (
-          <SkeletonGridCell />
-        ) : (
-          <WelcomeSection userName={userName} />
-        )}
-        {queriesAreFetching > 0 ? (
-          <SkeletonGridCell />
-        ) : (
-          <WeatherSection
-            forecastDetails={locationDetails}
-            themeKey={weatherKey}
-          />
-        )}
-        {queriesAreFetching > 0 ? (
-          <SkeletonGridCell />
-        ) : (
-          <NewsSection articles={newsDetails} />
-        )}
+        <WelcomeSection userName={userName} error={userNameError} />
+        <WeatherSection
+          forecastDetails={locationDetails}
+          themeKey={weatherKey}
+          error={geolocationError[0]}
+        />
+        <NewsSection articles={newsDetails} error={reportsError} />
       </Grid2>
     </>
   );
 }
-
-const SkeletonGridCell = () => {
-  return (
-    <Grid2
-      component="section"
-      size={{ xs: 12, md: 6 }}
-      aria-label="section loading"
-    >
-      <Skeleton width="100%" height="18.75rem" />
-    </Grid2>
-  );
-};
-

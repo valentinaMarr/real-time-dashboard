@@ -8,9 +8,16 @@ import Typography from "@mui/material/Typography";
 import { motion } from "motion/react";
 import { useMemo } from "react";
 import { Clock } from "./Clock";
+import { ErrorMessage } from "./ErrorMessage";
 import { WelcomeIcon } from "./icons/WelcomeIcon";
 
-export const WelcomeSection = ({ userName }: { userName: string }) => {
+export const WelcomeSection = ({
+  userName,
+  error,
+}: {
+  userName: string;
+  error?: unknown;
+}) => {
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
   const date = new Date();
   const longDate = Intl.DateTimeFormat("en-US", {
@@ -27,6 +34,19 @@ export const WelcomeSection = ({ userName }: { userName: string }) => {
 
     return "Good evening, ";
   }, [userName]);
+
+  if (error) {
+    return (
+      <Grid2 container id="welcome-message-container" component="section">
+        <ErrorMessage
+          body={(error as Error).message}
+          headline={
+            ((error as Error)?.cause as string) || "An error has occurred"
+          }
+        />
+      </Grid2>
+    );
+  }
 
   return (
     <Grid2 container id="welcome-message-container" component="section">

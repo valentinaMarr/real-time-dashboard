@@ -7,14 +7,23 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-}
-
-body {
-  color: var(--text);
-  background: var(--background);
+  background-color: var(--background);
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+.body-none {
+  --body-start: #7ca7ce;
+
+  color: var(--text);
+  background-image: linear-gradient(
+    to top right,
+    var(--body-start) 30%,
+    var(--background)
+  );
 }
 
 * {
@@ -53,15 +62,15 @@ a {
 }
 
 .body-evening {
-  --evening-start: #9991d4;
-  --evening-end: #443898b0;
+  --evening-start: #443898;
+  --evening-end: #9991d4;
 
   background-image: linear-gradient(
     to top right,
-    var(--evening-start) 30%,
+    var(--evening-start),
     var(--evening-end)
   );
-  color: lightgray;
+  color: var(--text);
 }
 
 .body-sunny {
@@ -99,7 +108,6 @@ a {
   );
   color: var(--text);
 }
-
 main {
   background-color: rgba(255, 255, 255, 0.47);
   padding-inline: 1.43rem;

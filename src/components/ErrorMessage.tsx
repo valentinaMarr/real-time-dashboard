@@ -13,7 +13,6 @@ export const ErrorMessage = ({
 }) => {
   return (
     <Stack
-      component="main"
       direction="column"
       spacing={{ xs: 2 }}
       sx={{

@@ -7,7 +7,13 @@ import { ReactNode } from "react";
 import theme from "./theme";
 
 export const ProvidersAggrergator = ({ children }: { children: ReactNode }) => {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 60 * 1000,
+      },
+    },
+  });
   return (
     <QueryClientProvider client={queryClient}>
       <AppRouterCacheProvider>
