@@ -12,8 +12,6 @@ export async function GET() {
     );
   }
 
-  console.log("nickname value", nicknameCookie);
-
   return new NextResponse(JSON.stringify({ message: nicknameCookie.value }), {
     status: 200,
   });
